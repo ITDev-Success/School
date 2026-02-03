@@ -1,0 +1,29 @@
+{
+    "_hash": "35304fcfcd7da0fcaa7deab9f279e3d61f3c79be91f025bb4b1d880f44f3c8b0",
+    "patches": {
+        "laravel/helpers": [
+            {
+                "package": "laravel/helpers",
+                "description": "Fix nullable parameter deprecations for PHP 8.4",
+                "url": "patches/laravel-helpers-nullable-params.patch",
+                "sha256": "755de44f0a2f1cffea39bde6f3a0a7d5911bc91a14e71cbb4114d5b3e770a29b",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "spatie/laravel-activitylog": [
+            {
+                "package": "spatie/laravel-activitylog",
+                "description": "Fix nullable parameter deprecation for PHP 8.4",
+                "url": "patches/spatie-activitylog-nullable-param.patch",
+                "sha256": "3585a2980ef39682181ab36c269b4d4a02c5bc0f9cd6317f52702ca7ff2ac58f",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ]
+    }
+}

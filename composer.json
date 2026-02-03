@@ -14,7 +14,7 @@
         "aws/aws-sdk-php-laravel": "dev-master",
         "barryvdh/laravel-dompdf": "dev-master",
         "caneara/axiom": "^3.2",
-        "cweagans/composer-patches": "*",
+        "cweagans/composer-patches": "^1.7",
         "filament/tables": "^3.0-stable",
         "guzzlehttp/guzzle": "^7.0.1",
         "jantinnerezo/livewire-alert": "^3.0",
@@ -101,7 +101,7 @@
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185\" \"php artisan serve\" \"npm run dev\" --names=server,vite"
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185\" \"php artisan serve\" \"npm run watch\" --names=server,mix"
         ]
     },
     "config": {
