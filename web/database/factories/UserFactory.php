@@ -41,13 +41,6 @@ class UserFactory extends Factory
         $last  = $this->faker->lastName;
         $uniqueId = $this->faker->unique()->numberBetween(1000, 9999);
 
-
-        // Ensure a default usergroup exists
-        $defaultUsergroup = Usergroup::firstOrCreate(
-            ['id' => User::STUDENT_USERGROUP_ID],
-            ['name' => 'Student'] // Fallback data
-        );
-
         return [
             'name' => $first . ' ' . $last . $uniqueId,
             'email' => strtolower($first . $last . $uniqueId) . '@mailinator.com',
@@ -56,7 +49,7 @@ class UserFactory extends Factory
             'email_verification_code' => str_random(40),
             'registration_number' => $this->faker->unique()->numerify('######'),
             'remember_token' => str_random(10),
-            'usergroup_id' => $defaultUsergroup->id,
+            'usergroup_id' => 6, // Default student usergroup ID
             'status' => 'active',
             'email_verified' => true,
             'email_verified_at' => Carbon::now(),
@@ -74,7 +67,6 @@ class UserFactory extends Factory
     public function schoolAdmin()
     {
         return $this->state(function (array $attributes) {
-            Usergroup::firstOrCreate(['id' => User::SCHOOLADMIN_USERGROUP_ID], ['name' => 'School Admin']);
             return [
                 'usergroup_id' => User::SCHOOLADMIN_USERGROUP_ID,
             ];
@@ -92,7 +84,6 @@ class UserFactory extends Factory
     public function librarian()
     {
         return $this->state(function (array $attributes) {
-            Usergroup::firstOrCreate(['id' => User::LIBRARIAN_USERGROUP_ID], ['name' => 'Librarian']);
             return [
                 'usergroup_id' => User::LIBRARIAN_USERGROUP_ID,
             ];
@@ -110,7 +101,6 @@ class UserFactory extends Factory
     public function student()
     {
         return $this->state(function (array $attributes) {
-            Usergroup::firstOrCreate(['id' => User::STUDENT_USERGROUP_ID], ['name' => 'Student']);
             return [
                 'usergroup_id' => User::STUDENT_USERGROUP_ID,
             ];
@@ -128,7 +118,6 @@ class UserFactory extends Factory
     public function teacher()
     {
         return $this->state(function (array $attributes) {
-            Usergroup::firstOrCreate(['id' => User::TEACHER_USERGROUP_ID], ['name' => 'Teacher']);
             return [
                 'usergroup_id' => User::TEACHER_USERGROUP_ID,
             ];
@@ -146,7 +135,6 @@ class UserFactory extends Factory
     public function accountant()
     {
         return $this->state(function (array $attributes) {
-            Usergroup::firstOrCreate(['id' => User::ACCOUNTANT_USERGROUP_ID], ['name' => 'Accountant']);
             return [
                 'usergroup_id' => User::ACCOUNTANT_USERGROUP_ID,
             ];
@@ -164,7 +152,6 @@ class UserFactory extends Factory
     public function parent()
     {
         return $this->state(function (array $attributes) {
-            Usergroup::firstOrCreate(['id' => User::PARENT_USERGROUP_ID], ['name' => 'Parent']);
             return [
                 'usergroup_id' => User::PARENT_USERGROUP_ID,
             ];
@@ -182,7 +169,6 @@ class UserFactory extends Factory
     public function receptionist()
     {
         return $this->state(function (array $attributes) {
-            Usergroup::firstOrCreate(['id' => User::RECEPTIONIST_USERGROUP_ID], ['name' => 'Receptionist']);
             return [
                 'usergroup_id' => User::RECEPTIONIST_USERGROUP_ID,
             ];
@@ -200,7 +186,6 @@ class UserFactory extends Factory
     public function stockKeeper()
     {
         return $this->state(function (array $attributes) {
-            Usergroup::firstOrCreate(['id' => User::STOCK_KEEPER_USERGROUP_ID], ['name' => 'Stock Keeper']);
             return [
                 'usergroup_id' => User::STOCK_KEEPER_USERGROUP_ID,
             ];
