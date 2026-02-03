@@ -50,7 +50,7 @@ trait Dashboard
                               });
 
         $array['parentCount']    =  Cache::remember('parentCount_'.$school_id, env('CACHE_TIME'), function () use ($school_id)                          {
-                                  return User::BySchool($school_id)->ByRole(7)->whereHas('children', function($q) use ($search){
+                                  return User::BySchool($school_id)->ByRole(7)->whereHas('children', function($q) {
     
                 $q->whereHas('userStudent', function($q) 
                 {

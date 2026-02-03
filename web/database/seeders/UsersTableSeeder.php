@@ -161,21 +161,21 @@ class UsersTableSeeder extends Seeder
         // }
 
 
-        $user =  factory(User::class)->create([
+        $librarian =  factory(User::class)->create([
             'school_id'    =>   '1',
-            'name'         =>   'user',
-            'email'        =>   'user@school.com',
+            'name'         =>   'librarian',
+            'email'        =>   'librarian@school.com',
             'mobile_no'    =>   '2230456701',
             'usergroup_id' =>   "8"
           ]);
 
         factory(\App\Models\Userprofile::class)->create([
-                'school_id'     =>  $user->school_id,
-                'user_id'       =>  $user->id,
-                'usergroup_id'  =>  $user->usergroup_id,
-                'firstname'     =>  'user',
-                'lastname'      =>  'user',
-                'profession'    =>  'user',
+                'school_id'     =>  $librarian->school_id,
+                'user_id'       =>  $librarian->id,
+                'usergroup_id'  =>  $librarian->usergroup_id,
+                'firstname'     =>  'librarian',
+                'lastname'      =>  'librarian',
+                'profession'    =>  'librarian',
                 'address'       =>  'Antananarivo, Madagascar',
                 'country_id'    =>  '7',
                 'city_id'       =>  '1',
@@ -184,9 +184,9 @@ class UsersTableSeeder extends Seeder
                 ]);
 
             factory(\App\Models\TeacherProfile::class)->create([
-                    'school_id'         =>  $user->school_id,
+                    'school_id'         =>  $librarian->school_id,
                     'academic_year_id'  =>  1,
-                    'user_id'           =>  $user->id,
+                    'user_id'           =>  $librarian->id,
                     'status'            =>  1,
                 ]);
 
