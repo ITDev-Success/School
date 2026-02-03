@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and School Contributors
+ * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
  */
 namespace App\Http\Controllers\Admin\Setting;
 
@@ -9,6 +9,13 @@ use App\Http\Controllers\Controller;
 use App\Traits\SettingProcess;
 use Illuminate\Http\Request;
 
+/**
+ * Class MaintenanceController
+ *
+ * Controller for maintenance mode and related site-status settings.
+ *
+ * @package App\Http\Controllers\Admin\Setting
+ */
 class MaintenanceController extends Controller
 {
     use SettingProcess;

@@ -1,4 +1,3 @@
-{{-- SPDX-License-Identifier: MIT --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
@@ -9,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
     @include('layouts.partials.favicon')
-    <title>{{ config('app.name', 'School') }}</title>
+    <title>{{ config('app.name', 'GegoK12') }}</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <!-- Styles -->

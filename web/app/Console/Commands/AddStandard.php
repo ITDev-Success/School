@@ -46,8 +46,6 @@ class AddStandard extends Command
 
         $admin = User::where('mobile_no',$mobile)->first();
 
-        $request = new \stdClass();
-
         if ($this->option('default')) 
         {
             $request->standards = 'higher_secondary';

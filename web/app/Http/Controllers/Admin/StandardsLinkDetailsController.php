@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and School Contributors
+ * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
  */
 namespace App\Http\Controllers\Admin;
 
@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Traits\AcademicProcess;
 use Illuminate\Http\Request;
+use App\Models\Users\StudentUser;
 use App\Models\VideoConference;
 use App\Models\ExamSchedule;
 use App\Models\StandardLink;
@@ -34,13 +35,25 @@ use App\Models\User;
 use App\Models\Fee;
 use Carbon\Carbon;
 
+/**
+ * Class StandardsLinkDetailsController
+ *
+ * Provides detailed information for a specific
+ * standard–section (class) including students,
+ * teachers, attendance, timetable, exams, fees,
+ * events, class wall, and online conferences.
+ *
+ * @package App\Http\Controllers\Admin
+ */
 class StandardsLinkDetailsController extends Controller
 {
-    //
     /**
-     * Display the specified resource.
+     * Show standard overview details.
      *
-     * @param  int  $id
+     * Displays class information and student count
+     * after authorization check.
+     *
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -62,10 +75,10 @@ class StandardsLinkDetailsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Get timetable details for a standard.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return array
      */
     public function showTimetable($id)
     {
@@ -74,9 +87,9 @@ class StandardsLinkDetailsController extends Controller
         if(Gate::allows('standardlink',$standardLink))
         {
             $academic_year = SiteHelper::getAcademicYear(Auth::user()->school_id);
-            if(class_exists('School\Timetable\Models\Timetable'))
+            if(class_exists('Gegok12\Timetable\Models\Timetable'))
             {
-                $timetable = \School\Timetable\Models\Timetable::where([
+                $timetable = \Gegok12\Timetable\Models\Timetable::where([
                         ['school_id',Auth::user()->school_id],
                         ['academic_year_id',$academic_year->id],
                         ['standardLink_id',$id]
@@ -91,9 +104,9 @@ class StandardsLinkDetailsController extends Controller
             }    
 
             $array['periodCount'] = count($timetable[0]['schedule']);
-            if(class_exists('School\Timetable\Http\Resources\Timetable'))
+            if(class_exists('Gegok12\Timetable\Http\Resources\Timetable'))
             {
-                $array['timetable'] = \School\Timetable\Http\Resources\Timetable::collection($timetable);
+                $array['timetable'] = \Gegok12\Timetable\Http\Resources\Timetable::collection($timetable);
             }
             else{
                 $array['timetable'] = TimetableResource::collection($timetable);
@@ -107,10 +120,10 @@ class StandardsLinkDetailsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Get teachers assigned to a standard.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function showTeachers($id)
     {
@@ -134,10 +147,10 @@ class StandardsLinkDetailsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Get students enrolled in a standard.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function showStudents($id)
     {
@@ -147,7 +160,7 @@ class StandardsLinkDetailsController extends Controller
         if(Gate::allows('standardlink',$standardLink))
         {
             $academic_year = SiteHelper::getAcademicYear(Auth::user()->school_id);
-            $users  = User::where([['school_id',Auth::user()->school_id],['status','!=','exit']])->whereHas('studentAcademic',function($query) use($academic_year)
+            $users  = StudentUser::where([['school_id',Auth::user()->school_id],['status','!=','exit']])->whereHas('studentAcademic',function($query) use($academic_year)
                 { 
                     $query->where('academic_year_id',$academic_year->id);
                 })->ByRole(6)->ByStandard($id)->get()->sortBy('userprofile.firstname');
@@ -161,10 +174,12 @@ class StandardsLinkDetailsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Get aggregated student attendance summary.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Groups absent sessions month-wise.
+     *
+     * @param int $id
+     * @return array
      */
     public function getStudentAttendance($id)
     {
@@ -217,10 +232,10 @@ class StandardsLinkDetailsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Get daily attendance with chart data.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return array
      */
     public function getAttendance($id)
     {
@@ -236,12 +251,23 @@ class StandardsLinkDetailsController extends Controller
             $start = strtotime('last month', strtotime($academic_year->start_date));
             $now = strtotime($academic_year->end_date);
             $i = 0;
-            while(($start = strtotime('next month', $start)) <= $now) 
+            // while(($start = strtotime('next month', $start)) <= $now) 
+            // {
+            //     $array['months']->$i->id = date('m-Y', $start);
+            //     $array['months']->$i->name = date('M Y', $start);
+            //     $i++;
+            // }
+
+            //new
+            while (($start = strtotime('next month', $start)) <= $now) 
             {
-                $array['months']->$i->id = date('m-Y', $start);
-                $array['months']->$i->name = date('M Y', $start);
-                $i++;
+                $months[] = [
+                    'id' => date('m-Y', $start),
+                    'name' => date('M Y', $start),
+                ];
             }
+            $array['months'] = $months;
+            
             $startDate  = Carbon::now()->firstOfMonth()->format('Y-m-d');  
             $endDate    = Carbon::now()->lastOfMonth()->format('Y-m-d');
             
@@ -435,9 +461,9 @@ class StandardsLinkDetailsController extends Controller
         {
             $academic_year = SiteHelper::getAcademicYear(Auth::user()->school_id);
 
-            if(class_exists('School\Exam\Models\ExamSchedule'))
+            if(class_exists('Gegok12\Exam\Models\ExamSchedule'))
             {
-                $upcomingExams  = \School\Exam\Models\ExamSchedule::whereHas('exam',function($query) use($academic_year)
+                $upcomingExams  = \Gegok12\Exam\Models\ExamSchedule::whereHas('exam',function($query) use($academic_year)
                     { 
                         $query->where('academic_year_id',$academic_year->id);
                     })->where('standard_id',$standardLink->id)->where('start_time','>=',date('Y-m-d H:i:s'))->orderBy('start_time','ASC')->get(); 
@@ -475,9 +501,9 @@ class StandardsLinkDetailsController extends Controller
             $academic_year = SiteHelper::getAcademicYear(Auth::user()->school_id);
             $start_date = date('Y-m-d H:i:s',strtotime($academic_year->start_date));
 
-            if(class_exists('School\Exam\Models\ExamSchedule'))
+            if(class_exists('Gegok12\Exam\Models\ExamSchedule'))
             {
-                $pastExams  = \School\Exam\Models\ExamSchedule::whereHas('exam',function($query) use($academic_year)
+                $pastExams  = \Gegok12\Exam\Models\ExamSchedule::whereHas('exam',function($query) use($academic_year)
                     { 
                         $query->where('academic_year_id',$academic_year->id);
                     })->where('standard_id',$standardLink->id)->where([
@@ -520,9 +546,9 @@ class StandardsLinkDetailsController extends Controller
             $academic_year = SiteHelper::getAcademicYear(Auth::user()->school_id);
             
             //new condition
-            if(class_exists('School\Fee\Models\Fee'))
+            if(class_exists('Gegok12\Fee\Models\Fee'))
             {
-                $fees = \School\Fee\Models\Fee::where([
+                $fees = \Gegok12\Fee\Models\Fee::where([
                         ['school_id',Auth::user()->school_id],
                         ['academic_year_id',$academic_year->id],
                         ['standardLink_id',$id],
@@ -538,9 +564,9 @@ class StandardsLinkDetailsController extends Controller
             }
             //end
             
-            if(class_exists('School\Fee\Http\Resources\Fee'))
+            if(class_exists('Gegok12\Fee\Http\Resources\Fee'))
             {
-                $array['feelist'] = \School\Fee\Http\Resources\Fee::collection($fees);
+                $array['feelist'] = \Gegok12\Fee\Http\Resources\Fee::collection($fees);
             }
             else
             {
@@ -550,9 +576,9 @@ class StandardsLinkDetailsController extends Controller
             foreach ($fees as $fee) 
             {
                 //new condition
-                if(class_exists('School\Fee\Models\FeePayment'))
+                if(class_exists('Gegok12\Fee\Models\FeePayment'))
                 {
-                    $feepayments  = \School\Fee\Models\FeePayment::where('fee_id',$fee->id)->whereHas('user',function($query) use($id)
+                    $feepayments  = \Gegok12\Fee\Models\FeePayment::where('fee_id',$fee->id)->whereHas('user',function($query) use($id)
                     { 
                         $query->whereHas('studentAcademicLatest',function($q) use($id)
                             {
@@ -583,9 +609,9 @@ class StandardsLinkDetailsController extends Controller
                 $array['unpaidStudents'][$fee->id] = UserResource::collection($students[$fee->id]->get());
 
                 //new
-                if(class_exists('School\Fee\Http\Resources\FeePayment'))
+                if(class_exists('Gegok12\Fee\Http\Resources\FeePayment'))
                 {
-                    $feepayment = \School\Fee\Http\Resources\FeePayment::collection($feepayments->get());
+                    $feepayment = \Gegok12\Fee\Http\Resources\FeePayment::collection($feepayments->get());
                 }
                 else
                 {
@@ -645,7 +671,12 @@ class StandardsLinkDetailsController extends Controller
 
         return $array;
     }
-
+    /**
+     * Get online conference sessions for a class.
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
     public function showConference($id)
     {
         //

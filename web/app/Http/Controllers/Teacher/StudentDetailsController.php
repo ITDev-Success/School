@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and School Contributors
+ * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
  */
 namespace App\Http\Controllers\Teacher;
 
@@ -13,7 +13,10 @@ use App\Http\Resources\UserSibling as UserSiblingResource;
 use App\Http\Resources\ActivityLog as ActivityLogResource;
 use App\Http\Resources\UserDetail as UserDetailResource;
 use App\Http\Resources\Discipline as DisciplineResource;
+use App\Http\Resources\UserFees as UserFeesResource;  //new
+use App\Http\Resources\LeaveHistory as LeaveHistoryResource;
 use App\Http\Resources\User as UserResource;
+use App\Http\Resources\SiblingListResource; //new
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
@@ -29,6 +32,10 @@ use App\Models\User;
 use App\Models\Exam;
 use App\Models\Mark;
 use Exception;
+use App\Helpers\SiteHelper; //new
+use App\Models\TeacherLeaveApplication;
+use App\Models\Fee;
+use App\Models\StudentParentLink; //new
 
 class StudentDetailsController extends Controller
 {
@@ -98,9 +105,15 @@ class StudentDetailsController extends Controller
     public function showSiblings($name)
     {
         //
-        $student = User::with('userprofile')->where('name', $name)->get();
+        // $student = User::with('userprofile')->where('name', $name)->get();
       
-        $siblings = UserSiblingResource::collection($student);
+        // $siblings = UserSiblingResource::collection($student);
+
+        $student = User::with('userprofile')->where('name', $name)->first();
+        $parents=StudentParentLink::where('student_id',$student->id)->pluck('parent_id')->toArray();
+       $siblings=StudentParentLink::where('student_id','!=',$student->id)->whereIn('parent_id',$parents)->get()->unique('student_id');
+      
+        $siblings = SiblingListResource::collection($siblings);
          
         return $siblings;
     }
@@ -236,9 +249,9 @@ class StudentDetailsController extends Controller
         $users=User::with('studentAcademic')->where('name',$name)->get();
         $studentId=$users[0]['id'];
         $standardId=$users[0]['studentAcademicLatest']['standardLink_id'];
-        if(class_exists('School\Exam\Models\Mark'))
+        if(class_exists('Gegok12\Exam\Models\Mark'))
         {
-            $exam=\School\Exam\Models\Mark::where('school_id',Auth::user()->school_id)->where('standard_id',$standardId)->take(2)->orderBy('exam_id','DESC')->groupBy('exam_id')->pluck('exam_id')->toArray();
+            $exam=\Gegok12\Exam\Models\Mark::where('school_id',Auth::user()->school_id)->where('standard_id',$standardId)->take(2)->orderBy('exam_id','DESC')->groupBy('exam_id')->pluck('exam_id')->toArray();
         }
         else{
             $exam=Mark::where('school_id',Auth::user()->school_id)->where('standard_id',$standardId)->take(2)->orderBy('exam_id','DESC')->groupBy('exam_id')->pluck('exam_id')->toArray();
@@ -265,5 +278,34 @@ class StudentDetailsController extends Controller
         $documents = UserDocumentResource::collection($documents);
 
         return $documents;
+    }
+    public function showFees($name)
+    {
+        $student = User::where('name', $name)->first();
+
+        $school_id = Auth::user()->school_id;
+        $academic_year = SiteHelper::getAcademicYear($school_id);
+
+        $fees = Fee::where([['school_id',$school_id],['academic_year_id',$academic_year->id]])->where('standardLink_id',$student->studentAcademicLatest->standardLink_id)->orWhere('standardLink_id',null)->orderBy('start_date','DESC')->paginate(5);
+
+        $feepayments = UserFeesResource::collection($fees);
+         
+        return $feepayments;
+    }
+
+    public function showLeaveHistory($name)
+    {
+
+        $user = User::where('name', $name)->first();
+        $school_id = Auth::user()->school_id;
+        $academic_year = SiteHelper::getAcademicYear($school_id);
+        $leave = TeacherLeaveApplication::where([
+                ['user_id',$user->id],
+                ['school_id',$school_id],
+                ['academic_year_id',$academic_year->id]
+            ])->paginate(5);
+        $leave = LeaveHistoryResource::collection($leave);
+             
+        return $leave;
     } 
 }

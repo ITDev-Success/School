@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and School Contributors
+ * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
  */
 namespace App\Http\Controllers\Accountant;
 
@@ -15,9 +15,14 @@ use Notification;
 use Exception;
 use Log;
 
+/**
+ * Notification controller for accountant area.
+ *
+ * Provides endpoints to list, view and mark notifications as read for the
+ * authenticated accountant user.
+ */
 class NotificationController extends Controller
 {
-    //
 
     /**
      * Fetches the notifications.
@@ -50,10 +55,14 @@ class NotificationController extends Controller
         }
     }
 
+    /**
+     * Render the notification index view.
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
     public function index()
     {
-    	//
-    	return view('/accountant/notification/index');
+        return view('/accountant/notification/index');
     }
 
     /**

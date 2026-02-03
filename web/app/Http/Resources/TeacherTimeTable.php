@@ -27,9 +27,9 @@ class TeacherTimeTable extends JsonResource
         $school_id = Auth::user()->school_id;
         $academic_year  = SiteHelper::getAcademicYear($school_id);
         
-        if(class_exists('School\Timetable\Models\Timetable'))
+        if(class_exists('Gegok12\Timetable\Models\Timetable'))
         {
-            $timetables = \School\Timetable\Models\Timetable::where([['school_id',$school_id],['academic_year_id',$academic_year->id]])->whereIn('standardLink_id',$array['standardLink'])->get();
+            $timetables = \Gegok12\Timetable\Models\Timetable::where([['school_id',$school_id],['academic_year_id',$academic_year->id]])->whereIn('standardLink_id',$array['standardLink'])->get();
         }
         else{
             $timetables = Timetable::where([['school_id',$school_id],['academic_year_id',$academic_year->id]])->whereIn('standardLink_id',$array['standardLink'])->get();

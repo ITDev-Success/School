@@ -188,6 +188,11 @@ Vue.component('student-leave-tab', require('./components/leave/student/listTab.v
 Vue.component('student-leave-list', require('./components/leave/student/List.vue').default);
 Vue.component('approve-student-leave', require('./components/leave/student/Approve.vue').default);
 
+//reception leave application
+Vue.component('reception-leave-list', require('./components/leave/reception/List.vue').default);
+Vue.component('reception-create-leave', require('./components/leave/reception/Create.vue').default);
+Vue.component('reception-edit-leave', require('./components/leave/reception/Edit.vue').default);
+
 //absentees
 Vue.component('absentees-student', require('./components/dashboard/StudentAttendance.vue').default);
 Vue.component('absentees-staff', require('./components/dashboard/StaffAttendance.vue').default);
@@ -334,7 +339,17 @@ Vue.component('slider-image', require('./components/feed/slider.vue').default);
 Vue.component('homeslider', require('./components/Slider.vue').default);
 Vue.component('nav-bar', require('./components/Navigation.vue').default);
 
+//new
 
+Vue.component('teacherlist-lentbook', require('./components/booklending/TeacherList.vue').default);
+
+//Library cards 
+Vue.component('librarymembersearch-filter', require('./components/librarycard/Filter.vue').default);
+Vue.component('librarymember-list', require('./components/librarycard/List.vue').default);
+Vue.component('libraryteachersearch-filter', require('./components/librarycard/TeacherFilter.vue').default);
+Vue.component('libraryteacher-list', require('./components/librarycard/TeacherList.vue').default);
+Vue.component('librarystaff-list', require('./components/librarycard/StaffList.vue').default);
+Vue.component('librarystaff-filter', require('./components/librarycard/StaffFilter.vue').default);
 
 
 

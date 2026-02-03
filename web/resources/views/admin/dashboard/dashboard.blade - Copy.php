@@ -1,8 +1,3 @@
-<?php
-/**
- * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and School Contributors
- */
 @extends('layouts.admin.layout')
 
 @section('content')

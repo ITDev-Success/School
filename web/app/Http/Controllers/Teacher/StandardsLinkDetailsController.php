@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and School Contributors
+ * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
  */
 namespace App\Http\Controllers\Teacher;
 
@@ -133,12 +133,24 @@ class StandardsLinkDetailsController extends Controller
             $start = strtotime('last month', strtotime($academic_year->start_date));
             $now = strtotime($academic_year->end_date);
             $i = 0;
-            while(($start = strtotime('next month', $start)) <= $now) 
+            // while(($start = strtotime('next month', $start)) <= $now) 
+            // {
+            //     $array['months']->$i->id = date('m-Y', $start);
+            //     $array['months']->$i->name = date('M Y', $start);
+            //     $i++;
+            // }
+
+            // new
+            while (($start = strtotime('next month', $start)) <= $now) 
             {
-                $array['months']->$i->id = date('m-Y', $start);
-                $array['months']->$i->name = date('M Y', $start);
-                $i++;
+                $months[] = [
+                    'id' => date('m-Y', $start),
+                    'name' => date('M Y', $start),
+                ];
             }
+
+            $array['months'] = $months;
+
             $startDate  = Carbon::now()->firstOfMonth()->format('Y-m-d');  
             $endDate    = Carbon::now()->lastOfMonth()->format('Y-m-d');
             
@@ -220,12 +232,24 @@ class StandardsLinkDetailsController extends Controller
             $start = strtotime('last month', strtotime($academic_year->start_date));
             $now = strtotime($academic_year->end_date);
             $i = 0;
-            while(($start = strtotime('next month', $start)) <= $now) 
+            // while(($start = strtotime('next month', $start)) <= $now) 
+            // {
+            //     $array['months']->$i->id = date('m-Y', $start);
+            //     $array['months']->$i->name = date('M Y', $start);
+            //     $i++;
+            // }
+            
+            // new
+            while (($start = strtotime('next month', $start)) <= $now) 
             {
-                $array['months']->$i->id = date('m-Y', $start);
-                $array['months']->$i->name = date('M Y', $start);
-                $i++;
+                $months[] = [
+                    'id' => date('m-Y', $start),
+                    'name' => date('M Y', $start),
+                ];
             }
+
+            $array['months'] = $months;
+
             $startDate      = Carbon::parse($date)->firstOfMonth()->format('Y-m-d');  
             $endDate        = Carbon::parse($date)->lastOfMonth()->format('Y-m-d'); 
             
@@ -300,9 +324,9 @@ class StandardsLinkDetailsController extends Controller
         if(Gate::allows('standardlink',$standardLink))
         {
             $academic_year = SiteHelper::getAcademicYear(Auth::user()->school_id);
-            if(class_exists('School\Exam\Models\ExamSchedule'))
+            if(class_exists('Gegok12\Exam\Models\ExamSchedule'))
             {
-                $upcomingExams  = \School\Exam\Models\ExamSchedule::whereHas('exam',function($query) use($academic_year)
+                $upcomingExams  = \Gegok12\Exam\Models\ExamSchedule::whereHas('exam',function($query) use($academic_year)
                     { 
                         $query->where('academic_year_id',$academic_year->id);
                     })->where('standard_id',$standardLink->id)->where('start_time','>=',date('Y-m-d H:i:s'))->orderBy('start_time','ASC')->get(); 

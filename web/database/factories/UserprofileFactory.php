@@ -13,7 +13,7 @@ class UserprofileFactory extends Factory
 
    public function definition()
     {
-    $alternate_no = $this->faker->unique()->randomNumber($nbDigits = 9, $strict = false);
+    $alternate_no = $this->faker->unique()->numerify('#########');
 
     $gender = $this->faker->randomElement(['male', 'female']);
 
@@ -25,17 +25,17 @@ class UserprofileFactory extends Factory
 
     $caste = $this->faker->randomElement(['BC','BCM','FC','MBC','OBC','Others','SC','SCA','ST']);
 
-    $city = $this->faker->randomElement(['Antananarivo' , 'Antsirabe' , 'Fianarantsoa' , 'Toamasina' , 'Mahajanga']);
+    $city = $this->faker->randomElement(['Bangalore' , 'Chennai' , 'Hyderabad' , 'Mumbai' , 'Thiruvananthapuram']);
 
-    $city_id = $this->faker->randomElement(['1' , '2' , '10' , '18' , '14']);
+    $city_id = $this->faker->randomElement(['12' , '24' , '25' , '15' , '13']);
 
-    $state_id = $this->faker->randomElement(['1' , '1' , '3' ,  '5' , '4']);
+    $state_id = $this->faker->randomElement(['12' , '24' , '25' ,  '15' , '13']);
 
-    $pincode = $this->faker->unique()->randomNumber($nbDigits = 6, $strict = false);
+    $pincode = $this->faker->unique()->numerify('######');
 
-    $registration_number = $this->faker->unique()->randomNumber($nbDigits = 6, $strict = false);
+    $registration_number = $this->faker->unique()->numerify('######');
 
-    $EMIS_number = $this->faker->unique()->randomNumber($nbDigits = 6, $strict = false);
+    $EMIS_number = $this->faker->unique()->numerify('######');
 
     $joining_date = $this->faker->dateTimeBetween($startDate = '-4 years', $endDate = '-2 years', $timezone = null);
 
@@ -61,7 +61,7 @@ class UserprofileFactory extends Factory
         'native_place'          =>  $city,
         'mother_tongue'         =>  $mother_tongue,
         'caste'                 =>  $caste,
-        'address'               =>  $city,
+        'address'               =>  $this->faker->address,
         'city_id'               =>  $city_id,
         'state_id'              =>  $state_id,
         'country_id'            =>  7,

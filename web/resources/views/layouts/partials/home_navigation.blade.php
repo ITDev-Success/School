@@ -1,9 +1,8 @@
-{{-- SPDX-License-Identifier: MIT --}}
 @if(request()->is('/'))
     <nav class="navbar sticky bg-white w-full flex  lg:flex-row px-4 lg:px-8 pt-4 mb-0 justify-between items-center shadow">
         <div>
             <a href="{{ url('/') }}" >
-                <img src="{{ asset('images/gego_k12.png') }}" class="inline-block mb-4" style="height:55px;" alt="School Logo">
+                <img src="{{ asset('images/gego_k12.png') }}" class="inline-block mb-4" style="height:55px;" alt="GegoK12 Logo">
             </a>
         </div>
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and School Contributors
+ * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
  */
 namespace App\Http\Controllers\Teacher;
 
@@ -101,6 +101,8 @@ class StudentAssignmentController extends Controller
         //
         try
         {
+            $school_id = Auth::user()->school_id;
+
             $studentAssignment     =   StudentAssignment::where('id',$id)->first();
 
             $studentAssignment->obtained_marks  =   $request->obtained_marks;
@@ -182,6 +184,8 @@ class StudentAssignmentController extends Controller
         //
         try
         {
+            $school_id = Auth::user()->school_id;
+            
             $studentAssignment     =   StudentAssignment::where('id',$id)->first();
 
             $studentAssignment->obtained_marks  =   $request->obtained_marks;

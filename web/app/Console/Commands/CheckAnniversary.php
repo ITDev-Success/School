@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Console\Command;
 use App\Traits\AutoPostProcess;
 use App\Traits\EventProcess;
-use App\Events\StandardPushEvent;
+
 use App\Models\Userprofile;
 use App\Helpers\SiteHelper;
 use App\Traits\Common;
@@ -102,7 +102,7 @@ class CheckAnniversary extends Command
                     }
 
 
-                    $academic_year_id=$teacher->teacherprofile[0]['academic_year_id']; 
+                    $academic_year_id=$teacher->teacherprofile[0][academic_year_id]; 
 
                     $image = $this->getFilePath('uploads/images/work_anniversary.jpg');
 

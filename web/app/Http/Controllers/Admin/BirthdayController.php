@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and School Contributors
+ * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
  */
 namespace App\Http\Controllers\Admin;
 
@@ -22,6 +22,14 @@ use App\Models\User;
 use Exception;
 use Log;
 
+/**
+ * Class BirthdayController
+ *
+ * Controller handling birthday and work-anniversary reminders,
+ * message dispatching and related dashboard views for users.
+ *
+ * @package App\Http\Controllers\Admin
+ */
 class BirthdayController extends Controller
 {
     use SendPushNotification;

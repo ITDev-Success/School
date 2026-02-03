@@ -110,14 +110,14 @@ class StudentService {
 	
 		//dd($classCount);
 		$subjects=Subject::where('standard_id',$standard_id)->where('section_id',$section_id)->pluck('name')->toArray();
-		if(class_exists('School\Exam\Models\Mark'))
+		if(class_exists('Gegok12\Exam\Models\Mark'))
         {
-			$marksone=\School\Exam\Models\Mark::where('user_id',$studentId)->where('exam_id',$examIdOne)->pluck('obtained_marks')->toArray();
-			$markstwo=\School\Exam\Models\Mark::where('user_id',$studentId)->where('exam_id',$examIdTwo)->pluck('obtained_marks')->toArray();
+			$marksone=\Gegok12\Exam\Models\Mark::where('user_id',$studentId)->where('exam_id',$examIdOne)->pluck('obtained_marks')->toArray();
+			$markstwo=\Gegok12\Exam\Models\Mark::where('user_id',$studentId)->where('exam_id',$examIdTwo)->pluck('obtained_marks')->toArray();
 
-			$examOneAverage=\School\Exam\Models\Mark::where([['standard_id',$standardId],['exam_id',$examIdOne]])->groupBy('subject_id')->selectRaw('round(avg(obtained_marks)) as avg')->pluck('avg');
+			$examOneAverage=\Gegok12\Exam\Models\Mark::where([['standard_id',$standardId],['exam_id',$examIdOne]])->groupBy('subject_id')->selectRaw('round(avg(obtained_marks)) as avg')->pluck('avg');
 
-			$examTwoAverage=\School\Exam\Models\Mark::where([['standard_id',$standardId],['exam_id',$examIdTwo]])->groupBy('subject_id')->selectRaw('round(avg(obtained_marks)) as avg')->pluck('avg');
+			$examTwoAverage=\Gegok12\Exam\Models\Mark::where([['standard_id',$standardId],['exam_id',$examIdTwo]])->groupBy('subject_id')->selectRaw('round(avg(obtained_marks)) as avg')->pluck('avg');
 	    }
 	    else{
 	    	$marksone=Mark::where('user_id',$studentId)->where('exam_id',$examIdOne)->pluck('obtained_marks')->toArray();
@@ -128,12 +128,12 @@ class StudentService {
 			$examTwoAverage=Mark::where([['standard_id',$standardId],['exam_id',$examIdTwo]])->groupBy('subject_id')->selectRaw('round(avg(obtained_marks)) as avg')->pluck('avg');
 	    }
 
-	    if(class_exists('School\Exam\Models\Exam'))
+	    if(class_exists('Gegok12\Exam\Models\Exam'))
         {		
 
-			$examone=\School\Exam\Models\Exam::where('standard_id',$standardId)->where('id',$examIdOne)->pluck('name')->toArray();
+			$examone=\Gegok12\Exam\Models\Exam::where('standard_id',$standardId)->where('id',$examIdOne)->pluck('name')->toArray();
 
-			$examtwo=\School\Exam\Models\Exam::where('standard_id',$standardId)->where('id',$examIdTwo)->pluck('name')->toArray();
+			$examtwo=\Gegok12\Exam\Models\Exam::where('standard_id',$standardId)->where('id',$examIdTwo)->pluck('name')->toArray();
 	    }
 	    else{
 	    	$examone=Exam::where('standard_id',$standardId)->where('id',$examIdOne)->pluck('name')->toArray();

@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and School Contributors
+ * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
  */
 namespace App\Http\Controllers\Teacher;
 
@@ -85,7 +85,7 @@ class TaskController extends Controller
     {
         try
         {
-            if( count($request->selectedTaskCount) > 0 )
+            if( $request->selectedTaskCount > 0 ) // if( count($request->selectedTaskCount) > 0 )
             {
                 foreach ($request->task_completed as $task_id) 
                 {

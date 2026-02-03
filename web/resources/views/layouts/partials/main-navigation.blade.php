@@ -1,9 +1,8 @@
-{{-- SPDX-License-Identifier: MIT --}}
 @unless(request()->is('/'))
     <nav class="navbar sticky bg-white w-full flex  lg:flex-row px-4 lg:px-8 pt-4 mb-0 justify-between items-center shadow">
         <div>
             <a href="{{ url('/') }}" >
-                <img src="{{ asset('images/gego_k12.png') }}" class="inline-block mb-4" style="height:55px;" alt="School Logo">
+                <img src="{{ asset('images/gego_k12.png') }}" class="inline-block mb-4" style="height:55px;" alt="GegoK12 Logo">
             </a>
         </div>
 
@@ -63,7 +62,7 @@
                                 </ul>
                             </div> 
                             <div class="py-4">  
-                                <h2 class="text-base font-semibold text-gray-500 px-4 py-2">Also From School</h2>
+                                <h2 class="text-base font-semibold text-gray-500 px-4 py-2">Also From Gegok12</h2>
                                 <ul class="leading-loose text-gray-700 font-semibold pt-3 text-sm">
                                     <li class="px-4 py-2 hover:bg-gray-100"><a class="menu__item" href="#">About us</a></li>
                                     <li class="px-4 py-2 hover:bg-gray-100"><a class="menu__item" href="#">News</a></li>
@@ -72,7 +71,7 @@
                                 </ul>
                             </div>
                             <div class="py-4">
-                                <h2 class="text-base font-semibold text-gray-500 px-4 py-2">About School</h2>
+                                <h2 class="text-base font-semibold text-gray-500 px-4 py-2">About Gegok12</h2>
                                 <ul class="leading-loose text-gray-700 font-semibold pt-3 text-sm">
                                     <li class="px-4 py-2 hover:bg-gray-100"><a class="menu__item" href="#">About us</a></li>
                                     <li class="px-4 py-2 hover:bg-gray-100"><a class="menu__item" href="#">News</a></li>

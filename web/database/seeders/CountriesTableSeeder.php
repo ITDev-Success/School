@@ -79,10 +79,10 @@ class CountriesTableSeeder extends Seeder
 
 
         DB::table('countries')->Insert([
-            'name'        => 'Madagascar',
-            'short_name'  => 'MG',
-            'iso_code'    => 'MDG',
-            'tel_prefix'  => '261',
+            'name'        => 'India',
+            'short_name'  => 'IN',
+            'iso_code'    => 'IND',
+            'tel_prefix'  => '91',
             'status'      => '1',
             'created_at'  => date("Y-m-d H:i:s"),
             'updated_at'  => date("Y-m-d H:i:s"),

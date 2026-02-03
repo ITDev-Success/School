@@ -1,4 +1,3 @@
-{{-- SPDX-License-Identifier: MIT --}}
 @extends('layouts.admission')
 @section('content')
     <div class="w-full lg:mx-2">
@@ -27,6 +26,10 @@
             <h1 class="admin-h1 my-3 flex items-center">       
                 <span class="mx-3">{{ $closedetails['meta_value'] }}</span>
             </h1>
+        @else
+        <h1 class="admin-h1 my-3 flex items-center">       
+                <span class="mx-3">Admission Not Opened</span>
+            </h1>    
         @endif
     </div>
 @endsection

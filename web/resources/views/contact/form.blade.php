@@ -1,8 +1,7 @@
-{{-- SPDX-License-Identifier: MIT --}}
 @extends('layouts.main')
 
 @section('title')
-School - Contact Form 
+GegoK12 - Contact Form 
 @endsection
 
 @section('content')

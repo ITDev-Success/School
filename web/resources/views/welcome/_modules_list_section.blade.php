@@ -1,4 +1,3 @@
-{{-- SPDX-License-Identifier: MIT --}}
 <div class="bg-gray-800 pt-16 pb-48 lg:px-32 px-4">
 	<div class="container mx-auto">
 	<div class="flex flex-col lg:flex-row md:flex-row items-center justify-between">
@@ -40,7 +39,7 @@
 </div>
 <div class="container mx-auto -mt-32 px-8 lg:px-24">
 	<div class="w-full">
-		<img src="https://gego-static.s3.ap-south-1.amazonaws.com/school/school_dashboard.jpg" class="hero-image border-8 object-scale-down w-full">
+		<img src="https://gego-static.s3.ap-south-1.amazonaws.com/gegok12/gegok12_dashboard.jpg" class="hero-image border-8 object-scale-down w-full">
 	</div>
 </div>
 <div class="container mx-auto my-24 flex flex-wrap">

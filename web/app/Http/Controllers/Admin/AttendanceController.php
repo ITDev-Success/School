@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and School Contributors
+ * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
  */
 namespace App\Http\Controllers\Admin;
 
@@ -24,7 +24,14 @@ use App\Traits\Common;
 use Carbon\Carbon;
 use Exception;
 use Log;
-
+/**
+ * Class AttendanceController
+ *
+ * Controller for managing student attendance: listing, creating,
+ * exporting and retrieving student attendance data.
+ *
+ * @package App\Http\Controllers\Admin
+ */
 class AttendanceController extends Controller
 {
     use AcademicProcess;

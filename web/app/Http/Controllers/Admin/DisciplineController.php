@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and School Contributors
+ * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
  */
 namespace App\Http\Controllers\Admin;
 
@@ -26,6 +26,14 @@ use App\Models\User;
 use Exception;
 use Log;
 
+/**
+ * Class DisciplineController
+ *
+ * Controller for managing discipline records: listing, creating,
+ * updating, notifying parents and deleting discipline entries.
+ *
+ * @package App\Http\Controllers\Admin
+ */
 class DisciplineController extends Controller
 {
     use LogActivity;

@@ -1,4 +1,3 @@
-{{-- SPDX-License-Identifier: MIT --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -8,7 +7,7 @@
         @include('layouts.partials.favicon')
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>{{ config('app.name', 'School') }}</title>
+        <title>{{ config('app.name', 'GegoK12') }}</title>
         <!-- Styles -->
 
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -17,13 +16,12 @@
          <script>
         window.User = {!! json_encode(optional(auth()->user())->only('id')) !!}
     </script>
-
+   
     <!-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> -->
     
     <!-- new -->
     <script>
        window.AppConfig = {
-          gtimetable_enabled: @json(config('gtimetable.enabled')),
           gquiz_enabled: @json(config('gquiz.enabled')),
           gexam_enabled: @json(config('gexam.enabled')),
           ginventory_enabled: @json(config('ginventory.enabled')),
@@ -40,6 +38,7 @@
     <!-- end -->
 
  <livewire:styles>
+
     </head>
     <body class="font-primary antialiased min-h-screen overflow-x-hidden">
         <div id="app">
@@ -63,6 +62,8 @@
         @stack('scripts')
 
         <livewire:scripts>
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script> 
 
         <script>
    window.addEventListener('alert', event => {

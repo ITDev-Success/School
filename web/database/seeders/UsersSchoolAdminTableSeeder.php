@@ -29,7 +29,7 @@ class UsersSchoolAdminTableSeeder extends Seeder
             $schoolAdmin = User::factory()->create([
                 'school_id'    =>   $school->id,
                 'name'         =>   'demoschool',
-                'email'        =>   'admin@school.com',
+                'email'        =>   'demoschool@mailinator.com',
                 'mobile_no'    =>   '2230456789',
                 'usergroup_id' =>   3
             ]);
@@ -41,18 +41,18 @@ class UsersSchoolAdminTableSeeder extends Seeder
                 'firstname'     =>  'demo',
                 'lastname'      =>  'school',
                 'profession'    =>  'admin',
-                'address'       =>  'Antananarivo, Madagascar',
+                'address'       =>  'Namakkal,Tamilnadu,India',
                 'country_id'    =>  7,
-                'city_id'       =>  1,
-                'state_id'      =>  1,
-                'pincode'       =>  '101'
+                'city_id'       =>  31,
+                'state_id'      =>  24,
+                'pincode'       =>  '625001'
             ]);
 
             //librarian
             $librarian =  User::factory()->create([
                 'school_id'    =>   $school->id,
                 'name'         =>   'librarian'.$school->id,
-                'email'        =>   'librarian'.$school->id.'@school.com',
+                'email'        =>   'librarian'.$school->id.'@mailinator.com',
                 'mobile_no'    =>   '2230456701',
                 'usergroup_id' =>   8
             ]);
@@ -64,11 +64,11 @@ class UsersSchoolAdminTableSeeder extends Seeder
                 'firstname'     =>  'librarian',
                 'lastname'      =>  'librarian',
                 'profession'    =>  'librarian',
-                'address'       =>  'Antananarivo, Madagascar',
+                'address'       =>  'Namakkal,Tamilnadu,India',
                 'country_id'    =>  7,
-                'city_id'       =>  1,
-                'state_id'      =>  1,
-                'pincode'       =>  '101'
+                'city_id'       =>  31,
+                'state_id'      =>  24,
+                'pincode'       =>  '625001'
             ]);
             
             $academic_year = AcademicYear::where([['school_id',$school->id],['status',1]])->first();
@@ -84,7 +84,7 @@ class UsersSchoolAdminTableSeeder extends Seeder
             $receptionist =  User::factory()->create([
                 'school_id'    =>   $school->id,
                 'name'         =>   'receptionist'.$school->id,
-                'email'        =>   'receptionist'.$school->id.'@school.com',
+                'email'        =>   'receptionist'.$school->id.'@mailinator.com',
                 'mobile_no'    =>   '2230456702',
                 'usergroup_id' =>   10
             ]);
@@ -96,11 +96,11 @@ class UsersSchoolAdminTableSeeder extends Seeder
                 'firstname'     =>  'receptionist',
                 'lastname'      =>  'receptionist',
                 'profession'    =>  'others',
-                'address'       =>  'Antananarivo, Madagascar',
+                'address'       =>  'Namakkal,Tamilnadu,India',
                 'country_id'    =>  7,
-                'city_id'       =>  1,
-                'state_id'      =>  1,
-                'pincode'       =>  '101'
+                'city_id'       =>  31,
+                'state_id'      =>  24,
+                'pincode'       =>  '625001'
             ]);
             
             $academic_year = AcademicYear::where([['school_id',$school->id],['status',1]])->first();
@@ -116,7 +116,7 @@ class UsersSchoolAdminTableSeeder extends Seeder
             $accountant =  User::factory()->create([
                 'school_id'    =>   $school->id,
                 'name'         =>   'accountant'.$school->id,
-                'email'        =>   'accountant'.$school->id.'@school.com',
+                'email'        =>   'accountant'.$school->id.'@mailinator.com',
                 'mobile_no'    =>   '2230456703',
                 'usergroup_id' =>   11
             ]);
@@ -128,11 +128,11 @@ class UsersSchoolAdminTableSeeder extends Seeder
                 'firstname'     =>  'accountant',
                 'lastname'      =>  'accountant',
                 'profession'    =>  'others',
-                'address'       =>  'Antananarivo, Madagascar',
+                'address'       =>  'Namakkal,Tamilnadu,India',
                 'country_id'    =>  7,
-                'city_id'       =>  1,
-                'state_id'      =>  1,
-                'pincode'       =>  '101'
+                'city_id'       =>  31,
+                'state_id'      =>  24,
+                'pincode'       =>  '625001'
             ]);
             
             $academic_year = AcademicYear::where([['school_id',$school->id],['status',1]])->first();
@@ -148,7 +148,7 @@ class UsersSchoolAdminTableSeeder extends Seeder
             $stock_keeper =  User::factory()->create([
                 'school_id'    =>   $school->id,
                 'name'         =>   'stock_keeper'.$school->id,
-                'email'        =>   'stock_keeper'.$school->id.'@school.com',
+                'email'        =>   'stock_keeper'.$school->id.'@mailinator.com',
                 'mobile_no'    =>   '2230456704',
                 'usergroup_id' =>   12
             ]);
@@ -160,11 +160,11 @@ class UsersSchoolAdminTableSeeder extends Seeder
                 'firstname'     =>  'stock_keeper',
                 'lastname'      =>  'stock_keeper',
                 'profession'    =>  'others',
-                'address'       =>  'Antananarivo, Madagascar',
+                'address'       =>  'Namakkal,Tamilnadu,India',
                 'country_id'    =>  7,
-                'city_id'       =>  1,
-                'state_id'      =>  1,
-                'pincode'       =>  '101'
+                'city_id'       =>  31,
+                'state_id'      =>  24,
+                'pincode'       =>  '625001'
             ]);
             
             $academic_year = AcademicYear::where([['school_id',$school->id],['status',1]])->first();

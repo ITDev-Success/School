@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and School Contributors
+ * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
  */
 namespace App\Http\Controllers\Admin\Setting;
 
@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
 use App\Traits\Common;
 use Exception;
 
+/**
+ * Class SeoDetailController
+ *
+ * Controller for managing SEO details: site title, descriptions,
+ * social card images and related metadata.
+ *
+ * @package App\Http\Controllers\Admin\Setting
+ */
 class SeoDetailController extends Controller
 {
     use SettingProcess;

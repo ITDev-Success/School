@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
 
         // factory(App\Models\User::class, 1)->create([
         //     'name'         =>   'siteadmin',
-        //     'email'        =>   'siteadmin@school.com',
+        //     'email'        =>   'siteadmin@gegok12.com',
         //     'password'     =>  bcrypt('password'),
         //     'mobile_no'    =>   '1230456789',
         //     'usergroup_id' =>   "1"
@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
         // factory(App\Models\User::class, 1)->create([
         //     'school_id'    =>   '1',
         //     'name'         =>   'schooladmin',
-        //     'email'        =>   'admin@school.com',
+        //     'email'        =>   'admin@gegok12.com',
         //     'mobile_no'    =>   '2230456789',
         //     'usergroup_id' =>   "3"
         //   ]);
@@ -161,10 +161,10 @@ class UsersTableSeeder extends Seeder
         // }
 
 
-        $librarian =  factory(User::class)->create([
+        $librarian =  factory(App\Models\User::class)->create([
             'school_id'    =>   '1',
             'name'         =>   'librarian',
-            'email'        =>   'librarian@school.com',
+            'email'        =>   'librarian@mailinator.com',
             'mobile_no'    =>   '2230456701',
             'usergroup_id' =>   "8"
           ]);
@@ -176,11 +176,11 @@ class UsersTableSeeder extends Seeder
                 'firstname'     =>  'librarian',
                 'lastname'      =>  'librarian',
                 'profession'    =>  'librarian',
-                'address'       =>  'Antananarivo, Madagascar',
+                'address'       =>  'Namakkal,Tamilnadu,India',
                 'country_id'    =>  '7',
-                'city_id'       =>  '1',
-                'state_id'      =>  '1',
-                'pincode'       =>  '101'
+                'city_id'       =>  '31',
+                'state_id'      =>  '24',
+                'pincode'       =>  '625001'
                 ]);
 
             factory(\App\Models\TeacherProfile::class)->create([

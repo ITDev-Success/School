@@ -19,7 +19,7 @@ use App\Models\Userprofile;
 use App\Models\ActivityLog;
 use App\Helpers\SiteHelper;
 use App\Models\Attendance;
-use School\Timetable\Models\Timetable;
+use Gegok12\Timetable\Models\Timetable;
 use App\Models\Bulletin;
 use App\Models\Feedback;
 use App\Models\Product;
@@ -38,6 +38,13 @@ use Carbon\Carbon;
  */
 trait Dashboard
 {
+    /**
+     * Build data required for admin dashboard metrics and widgets.
+     *
+     * @param int $school_id School identifier
+     * @param int $admin_id Admin user identifier
+     * @return array Aggregated dashboard data
+     */
     public function adminDashboard($school_id,$admin_id)
     {
         $seconds = 300;
@@ -50,7 +57,7 @@ trait Dashboard
                               });
 
         $array['parentCount']    =  Cache::remember('parentCount_'.$school_id, env('CACHE_TIME'), function () use ($school_id)                          {
-                                  return User::BySchool($school_id)->ByRole(7)->whereHas('children', function($q) {
+                                  return User::BySchool($school_id)->ByRole(7)->whereHas('children', function($q) use ($search){
     
                 $q->whereHas('userStudent', function($q) 
                 {
@@ -126,8 +133,8 @@ trait Dashboard
 
         // $array['nonteachingCount']   = User::where('school_id',$school_id)->Where('usergroup_id',13)->count();
                 $array['upcomingExam'] =[];
-      if (class_exists('School\Exam\Models\ExamSchedule')) {
-        $array['upcomingExam']   = \School\Exam\Models\ExamSchedule::with('exam')->whereHas('exam',function($query) use($academic_year)
+      if (class_exists('Gegok12\Exam\Models\ExamSchedule')) {
+        $array['upcomingExam']   = \Gegok12\Exam\Models\ExamSchedule::with('exam')->whereHas('exam',function($query) use($academic_year)
                               { 
                                 $query->where('academic_year_id',$academic_year->id);
                               })->where('start_time','>=',date('Y-m-d H:i:s'))->orderBy('start_time','DESC')->take(10)->get()->groupBy('start_time'); 
@@ -175,6 +182,18 @@ trait Dashboard
         return $array;
     }
 
+    /**
+     * Build data required for student dashboard including exams, marks, and attendance.
+     *
+     * @param int $school_id School identifier
+     * @param \App\Models\User $user_id Student user model (expects ->id)
+     * @param int $standardLink_id Standard link identifier
+     * @param mixed $subject Subject filter (nullable)
+     * @param mixed $exam Exam filter (nullable)
+     * @param mixed $mark Mark filter (nullable)
+     * @param mixed $exam_date Exam date filter (nullable)
+     * @return array Student dashboard data
+     */
     public function studentDashboard($school_id,$user_id,$standardLink_id,$subject,$exam,$mark,$exam_date)
     {
         $array = [];
@@ -186,10 +205,10 @@ trait Dashboard
 
         $date=date('Y-m-d H:i:s');
         
-        if(class_exists('School\Exam\Models\Mark'))
+        if(class_exists('Gegok12\Exam\Models\Mark'))
         {
 
-            $marks              =   \School\Exam\Models\Mark::where([['school_id',$school_id],['academic_year_id',$academic_year->id],['user_id',$user_id->id]]);
+            $marks              =   \Gegok12\Exam\Models\Mark::where([['school_id',$school_id],['academic_year_id',$academic_year->id],['user_id',$user_id->id]]);
 
             
             if($mark != '')
@@ -230,7 +249,7 @@ trait Dashboard
         $array['upcomingeventCount']  = Events::where([['school_id',$school_id],['standard_id',$standardLink_id],['end_date','>',$date],['category','!=','holidays']])->count();
         $array['upcomingholidayCount']  = Events::where([['school_id',$school_id],['end_date','>=',$date],['category','=','holidays']])->count();
 
-        if(class_exists('School\Exam\Models\Mark'))
+        if(class_exists('Gegok12\Exam\Models\Mark'))
         {
             $array['marks']             = $marks->take(5)->get();
         }
@@ -239,6 +258,13 @@ trait Dashboard
         return $array;
     }
 
+    /**
+     * Build data required for teacher dashboard including timetable, notices, and exams.
+     *
+     * @param int $school_id School identifier
+     * @param int $teacher_id Teacher user identifier
+     * @return array Teacher dashboard data
+     */
     public function teacherDashboard($school_id,$teacher_id)
     {
         $array = [];
@@ -260,7 +286,7 @@ trait Dashboard
 
         $array['subject']       = $teachersubjects;
          $array['timetable'] = [];
-         if (class_exists('School\Timetable\Models\Timetable')) {
+         if (class_exists('Gegok12\Timetable\Models\Timetable')) {
         $timetables     = Timetable::where([['school_id',$school_id],['academic_year_id',$academic_year->id],['day',date('l')]])->whereIn('standardLink_id',$standardLinks)->get();
        
         foreach ($timetables as $key => $timetable) 
@@ -289,8 +315,8 @@ trait Dashboard
 
         $array['noticeboard']   = NoticeBoard::where([['school_id',$school_id],['academic_year_id',$academic_year->id],['type','!=','class']])->orderBy('created_at','DESC')->take(5)->get();
         $array['upcomingExam']=[];
-         if (class_exists('School\Exam\Models\ExamSchedule')) {
-        $array['upcomingExam']  = \School\Exam\Models\ExamSchedule::with('exam','subject')->whereIn('standard_id',$standardLinks)->whereHas('exam',function($query) use($academic_year)
+         if (class_exists('Gegok12\Exam\Models\ExamSchedule')) {
+        $array['upcomingExam']  = \Gegok12\Exam\Models\ExamSchedule::with('exam','subject')->whereIn('standard_id',$standardLinks)->whereHas('exam',function($query) use($academic_year)
         { 
             $query->where('academic_year_id',$academic_year->id);
         })->where('start_time','>=',date('Y-m-d H:i:s'))->orderBy('start_time','DESC')->take(10)->get()->groupBy('start_time');
@@ -299,6 +325,13 @@ trait Dashboard
         return $array;
     }
 
+    /**
+     * Build dashboard metrics for receptionist users.
+     *
+     * @param int $school_id School identifier
+     * @param int $receptionist_id Receptionist user identifier
+     * @return array Reception dashboard data
+     */
     public function receptionDashboard($school_id,$receptionist_id)
     {
         $seconds = 300;
@@ -328,6 +361,13 @@ trait Dashboard
         return $array;
     }
 
+    /**
+     * Build dashboard metrics for librarian users.
+     *
+     * @param int $school_id School identifier
+     * @param int $librarian_id Librarian user identifier
+     * @return array Librarian dashboard data
+     */
     public function librarianDashboard($school_id,$librarian_id)
     {
         $seconds = 300;
@@ -366,6 +406,13 @@ trait Dashboard
         return $array;
     }
 
+    /**
+     * Build dashboard metrics for accountant users.
+     *
+     * @param int $school_id School identifier
+     * @param int $accountant_id Accountant user identifier
+     * @return array Accountant dashboard data
+     */
     public function accountantDashboard($school_id,$accountant_id)
     {
         $seconds = 300;
