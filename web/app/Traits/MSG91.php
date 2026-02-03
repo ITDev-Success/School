@@ -96,7 +96,7 @@ trait MSG91
             $ROUTE_NO = env('REMINDER_ROUTE_NO');
 
             //Your message to send, Adding URL encoding.
-            $message = urlencode("Welcome to GegoK12. Your OTP is : $OTP");
+            $message = urlencode("Welcome to School. Your OTP is : $OTP");
      
             //Preparing post parameters
             $postData = array(
@@ -152,7 +152,7 @@ trait MSG91
             $ROUTE_NO = env('REMINDER_ROUTE_NO');
 
             //Your message to send, Adding URL encoding.
-            $message = urlencode("GegoK12.  Message : $message_content");
+            $message = urlencode("School.  Message : $message_content");
      
             //Preparing post parameters
             $postData = array(

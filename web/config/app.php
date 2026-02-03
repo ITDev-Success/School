@@ -175,7 +175,7 @@ return [
         //Gegosoft\NovaGego\ThemeServiceProvider::class,
         App\Conference\ConferenceServiceProvider::class,
         App\Calendar\CalendarServiceProvider::class,
-       // Gegok12\Inventory\InventoryServiceProvider::class
+       // School\Inventory\InventoryServiceProvider::class
 
     ],
 

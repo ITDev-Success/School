@@ -2,7 +2,7 @@
 @extends('layouts.main')
 
 @section('title')
-GegoK12 - Contact Form 
+School - Contact Form 
 @endsection
 
 @section('content')

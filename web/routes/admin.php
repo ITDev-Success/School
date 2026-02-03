@@ -1,6 +1,5 @@
 <?php
 
-include ('addon.php');
 
 
 Route::get( '/dashboard', 'DashboardController@index' )->name( 'dashboard' );
@@ -748,15 +747,15 @@ Route::post( '/emergency/send', 'SendEmergencyMessageController@store');
 Route::post( '/student/shift', 'SendMessageController@shift' );
 
 
-//Addons
-
-Route::get('/addon', function () {
-    return view('admin.addon.index');
-});
-
-Route::get('/addon/{name}/detail', function () {
-    return view('admin.addon.detail');
-});
+// //Addons
+//
+// Route::get('/addon', function () {
+//     return view('admin.addon.index');
+// });
+//
+// Route::get('/addon/{name}/detail', function () {
+//     return view('admin.addon.detail');
+// });
 
 
 

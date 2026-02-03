@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
+ * (c) 2025 GegoSoft Technologies and School Contributors
  */
 namespace App\Http\Controllers\Teacher;
 
@@ -300,9 +300,9 @@ class StandardsLinkDetailsController extends Controller
         if(Gate::allows('standardlink',$standardLink))
         {
             $academic_year = SiteHelper::getAcademicYear(Auth::user()->school_id);
-            if(class_exists('Gegok12\Exam\Models\ExamSchedule'))
+            if(class_exists('School\Exam\Models\ExamSchedule'))
             {
-                $upcomingExams  = \Gegok12\Exam\Models\ExamSchedule::whereHas('exam',function($query) use($academic_year)
+                $upcomingExams  = \School\Exam\Models\ExamSchedule::whereHas('exam',function($query) use($academic_year)
                     { 
                         $query->where('academic_year_id',$academic_year->id);
                     })->where('standard_id',$standardLink->id)->where('start_time','>=',date('Y-m-d H:i:s'))->orderBy('start_time','ASC')->get(); 

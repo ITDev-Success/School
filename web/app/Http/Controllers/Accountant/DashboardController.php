@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
+ * (c) 2025 GegoSoft Technologies and School Contributors
  */
 namespace App\Http\Controllers\Accountant;
 
@@ -88,9 +88,9 @@ class DashboardController extends Controller
         $school_id = Auth::user()->school_id;
         $academic_year = SiteHelper::getAcademicYear($school_id);
 
-        if(class_exists('Gegok12\Fee\Models\FeeGroup'))//new
+        if(class_exists('School\Fee\Models\FeeGroup'))//new
         {
-            $feelists = \Gegok12\Fee\Models\FeeGroup::where('school_id',$school_id)->whereHas('fee',function($query) use($school_id,$academic_year){
+            $feelists = \School\Fee\Models\FeeGroup::where('school_id',$school_id)->whereHas('fee',function($query) use($school_id,$academic_year){
                 $query->where([['school_id',$school_id],['academic_year_id',$academic_year->id]]);//,['fee_type','structural']
             })->get();
         }
@@ -100,9 +100,9 @@ class DashboardController extends Controller
             })->get();
         }
         
-        if(class_exists('Gegok12\Fee\Http\Resources\FeeGroup'))
+        if(class_exists('School\Fee\Http\Resources\FeeGroup'))
         {
-            $feelists = \Gegok12\Fee\Http\Resources\FeeGroup::collection($feelists);
+            $feelists = \School\Fee\Http\Resources\FeeGroup::collection($feelists);
         }
         else{
             $feelists = FeeGroupResource::collection($feelists);

@@ -2,7 +2,7 @@
 @extends('layouts.main')
 
 @section('title')
-GegoK12 - student-database-management-system |  Online School Management 
+School - student-database-management-system |  Online School Management 
 @endsection
 
 @section('content')

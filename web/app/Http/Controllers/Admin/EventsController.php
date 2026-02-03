@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
+ * (c) 2025 GegoSoft Technologies and School Contributors
  */
 namespace App\Http\Controllers\Admin;
 
@@ -718,10 +718,10 @@ class EventsController extends Controller
             if($event->category=='exam')
             {
                 //Added in if condition
-                if(class_exists('Gegok12\Exam\Models\Exam'))
+                if(class_exists('School\Exam\Models\Exam'))
                 {
-                    $exam=\Gegok12\Exam\Models\Exam::where('name',$event->title)->where('standard_id',$event->standard_id)->first();
-                    $schedule=\Gegok12\Exam\Models\ExamSchedule::where('exam_id',$exam->id)->first();
+                    $exam=\School\Exam\Models\Exam::where('name',$event->title)->where('standard_id',$event->standard_id)->first();
+                    $schedule=\School\Exam\Models\ExamSchedule::where('exam_id',$exam->id)->first();
                 }
                 else
                 {

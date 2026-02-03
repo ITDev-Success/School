@@ -19,7 +19,7 @@ use App\Models\Userprofile;
 use App\Models\ActivityLog;
 use App\Helpers\SiteHelper;
 use App\Models\Attendance;
-use Gegok12\Timetable\Models\Timetable;
+use School\Timetable\Models\Timetable;
 use App\Models\Bulletin;
 use App\Models\Feedback;
 use App\Models\Product;
@@ -126,8 +126,8 @@ trait Dashboard
 
         // $array['nonteachingCount']   = User::where('school_id',$school_id)->Where('usergroup_id',13)->count();
                 $array['upcomingExam'] =[];
-      if (class_exists('Gegok12\Exam\Models\ExamSchedule')) {
-        $array['upcomingExam']   = \Gegok12\Exam\Models\ExamSchedule::with('exam')->whereHas('exam',function($query) use($academic_year)
+      if (class_exists('School\Exam\Models\ExamSchedule')) {
+        $array['upcomingExam']   = \School\Exam\Models\ExamSchedule::with('exam')->whereHas('exam',function($query) use($academic_year)
                               { 
                                 $query->where('academic_year_id',$academic_year->id);
                               })->where('start_time','>=',date('Y-m-d H:i:s'))->orderBy('start_time','DESC')->take(10)->get()->groupBy('start_time'); 
@@ -186,10 +186,10 @@ trait Dashboard
 
         $date=date('Y-m-d H:i:s');
         
-        if(class_exists('Gegok12\Exam\Models\Mark'))
+        if(class_exists('School\Exam\Models\Mark'))
         {
 
-            $marks              =   \Gegok12\Exam\Models\Mark::where([['school_id',$school_id],['academic_year_id',$academic_year->id],['user_id',$user_id->id]]);
+            $marks              =   \School\Exam\Models\Mark::where([['school_id',$school_id],['academic_year_id',$academic_year->id],['user_id',$user_id->id]]);
 
             
             if($mark != '')
@@ -230,7 +230,7 @@ trait Dashboard
         $array['upcomingeventCount']  = Events::where([['school_id',$school_id],['standard_id',$standardLink_id],['end_date','>',$date],['category','!=','holidays']])->count();
         $array['upcomingholidayCount']  = Events::where([['school_id',$school_id],['end_date','>=',$date],['category','=','holidays']])->count();
 
-        if(class_exists('Gegok12\Exam\Models\Mark'))
+        if(class_exists('School\Exam\Models\Mark'))
         {
             $array['marks']             = $marks->take(5)->get();
         }
@@ -260,7 +260,7 @@ trait Dashboard
 
         $array['subject']       = $teachersubjects;
          $array['timetable'] = [];
-         if (class_exists('Gegok12\Timetable\Models\Timetable')) {
+         if (class_exists('School\Timetable\Models\Timetable')) {
         $timetables     = Timetable::where([['school_id',$school_id],['academic_year_id',$academic_year->id],['day',date('l')]])->whereIn('standardLink_id',$standardLinks)->get();
        
         foreach ($timetables as $key => $timetable) 
@@ -289,8 +289,8 @@ trait Dashboard
 
         $array['noticeboard']   = NoticeBoard::where([['school_id',$school_id],['academic_year_id',$academic_year->id],['type','!=','class']])->orderBy('created_at','DESC')->take(5)->get();
         $array['upcomingExam']=[];
-         if (class_exists('Gegok12\Exam\Models\ExamSchedule')) {
-        $array['upcomingExam']  = \Gegok12\Exam\Models\ExamSchedule::with('exam','subject')->whereIn('standard_id',$standardLinks)->whereHas('exam',function($query) use($academic_year)
+         if (class_exists('School\Exam\Models\ExamSchedule')) {
+        $array['upcomingExam']  = \School\Exam\Models\ExamSchedule::with('exam','subject')->whereIn('standard_id',$standardLinks)->whereHas('exam',function($query) use($academic_year)
         { 
             $query->where('academic_year_id',$academic_year->id);
         })->where('start_time','>=',date('Y-m-d H:i:s'))->orderBy('start_time','DESC')->take(10)->get()->groupBy('start_time');

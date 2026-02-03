@@ -40,7 +40,7 @@
 </div>
 <div class="container mx-auto -mt-32 px-8 lg:px-24">
 	<div class="w-full">
-		<img src="https://gego-static.s3.ap-south-1.amazonaws.com/gegok12/gegok12_dashboard.jpg" class="hero-image border-8 object-scale-down w-full">
+		<img src="https://gego-static.s3.ap-south-1.amazonaws.com/school/school_dashboard.jpg" class="hero-image border-8 object-scale-down w-full">
 	</div>
 </div>
 <div class="container mx-auto my-24 flex flex-wrap">

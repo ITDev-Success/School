@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
+ * (c) 2025 GegoSoft Technologies and School Contributors
  */
 namespace App\Http\Controllers\Admin;
 
@@ -630,9 +630,9 @@ class ReportsController extends Controller
     {
         try
         {
-            if(class_exists('Gegok12\Inventory\Models\Product'))
+            if(class_exists('School\Inventory\Models\Product'))
             {
-                $products = \Gegok12\Inventory\Models\Product::with('category','vendor')->where('school_id',Auth::user()->school_id)->get();
+                $products = \School\Inventory\Models\Product::with('category','vendor')->where('school_id',Auth::user()->school_id)->get();
             }
             else{
                 $products = Product::with('category','vendor')->where('school_id',Auth::user()->school_id)->get();
@@ -692,9 +692,9 @@ class ReportsController extends Controller
             {
                 $month=date('m');
                 $year=date('Y');
-                if(class_exists('Gegok12\Inventory\Models\PurchaseOrder')) //new
+                if(class_exists('School\Inventory\Models\PurchaseOrder')) //new
                 {
-                    $purchases = \Gegok12\Inventory\Models\PurchaseOrder::with('product')->where('school_id',Auth::user()->school_id)->whereMonth('purchased_date',$month)->whereYear('purchased_date',$year)->get(); 
+                    $purchases = \School\Inventory\Models\PurchaseOrder::with('product')->where('school_id',Auth::user()->school_id)->whereMonth('purchased_date',$month)->whereYear('purchased_date',$year)->get(); 
                 }
                 else{                                                      //new
                     $purchases = PurchaseOrder::with('product')->where('school_id',Auth::user()->school_id)->whereMonth('purchased_date',$month)->whereYear('purchased_date',$year)->get();
@@ -702,10 +702,10 @@ class ReportsController extends Controller
             }
             else
             {
-                if(class_exists('Gegok12\Inventory\Models\PurchaseOrder')) //new
+                if(class_exists('School\Inventory\Models\PurchaseOrder')) //new
                 {
 
-                    $purchases = \Gegok12\Inventory\Models\PurchaseOrder::with('product')->where('school_id',Auth::user()->school_id)->whereMonth('purchased_date',$purchase_month)->whereYear('purchased_date',$purchase_year)->get();
+                    $purchases = \School\Inventory\Models\PurchaseOrder::with('product')->where('school_id',Auth::user()->school_id)->whereMonth('purchased_date',$purchase_month)->whereYear('purchased_date',$purchase_year)->get();
                 }
                 else{
                     $purchases = PurchaseOrder::with('product')->where('school_id',Auth::user()->school_id)->whereMonth('purchased_date',$purchase_month)->whereYear('purchased_date',$purchase_year)->get();
@@ -765,9 +765,9 @@ class ReportsController extends Controller
                 $month=date('m');
                 $year=date('Y');
                 
-                if(class_exists('Gegok12\Inventory\Models\SalesOrder')) //new
+                if(class_exists('School\Inventory\Models\SalesOrder')) //new
                 {
-                    $sales = \Gegok12\Inventory\Models\SalesOrder::with('product','user')->where('school_id',Auth::user()->school_id)->whereMonth('sales_date',$month)->whereYear('sales_date',$year)->get();
+                    $sales = \School\Inventory\Models\SalesOrder::with('product','user')->where('school_id',Auth::user()->school_id)->whereMonth('sales_date',$month)->whereYear('sales_date',$year)->get();
                 }
                 else{                                              //new
                     $sales = SalesOrder::with('product','user')->where('school_id',Auth::user()->school_id)->whereMonth('sales_date',$month)->whereYear('sales_date',$year)->get();
@@ -775,9 +775,9 @@ class ReportsController extends Controller
             }
             else
             {
-                if(class_exists('Gegok12\Inventory\Models\SalesOrder')) //new
+                if(class_exists('School\Inventory\Models\SalesOrder')) //new
                 {
-                    $sales = \Gegok12\Inventory\Models\SalesOrder::with('product','user')->where('school_id',Auth::user()->school_id)->whereMonth('sales_date',$sales_month)->whereYear('sales_date',$sales_year)->get(); 
+                    $sales = \School\Inventory\Models\SalesOrder::with('product','user')->where('school_id',Auth::user()->school_id)->whereMonth('sales_date',$sales_month)->whereYear('sales_date',$sales_year)->get(); 
                 }
                 else{          //new
                     $sales = SalesOrder::with('product','user')->where('school_id',Auth::user()->school_id)->whereMonth('sales_date',$sales_month)->whereYear('sales_date',$sales_year)->get();

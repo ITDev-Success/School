@@ -2,7 +2,7 @@
 @extends('layouts.main')
 
 @section('title')
-GegoK12 - Facilities Management Software for Schools
+School - Facilities Management Software for Schools
 @endsection
 
 @section('content')

@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
+ * (c) 2025 GegoSoft Technologies and School Contributors
  */
 namespace App\Models;
 
@@ -342,9 +342,9 @@ class User extends Authenticatable implements HasMedia
 
     public function alumniprofile()
     {
-        if(class_exists('Gegok12\Alumni\Models\Alumniprofile'))
+        if(class_exists('School\Alumni\Models\Alumniprofile'))
         { 
-            return $this->hasOne('\Gegok12\Alumni\Models\Alumniprofile','user_id','id');
+            return $this->hasOne('\School\Alumni\Models\Alumniprofile','user_id','id');
         }
         else
         {
@@ -808,9 +808,9 @@ class User extends Authenticatable implements HasMedia
 
     public function feePayment()
     {
-        if(class_exists('Gegok12\Fee\Models\FeePayment'))
+        if(class_exists('School\Fee\Models\FeePayment'))
         {
-            return $this->hasMany('\Gegok12\Fee\Models\FeePayment','user_id','id');
+            return $this->hasMany('\School\Fee\Models\FeePayment','user_id','id');
         }
         else{
             return $this->hasMany('\App\Models\FeePayment','user_id','id');

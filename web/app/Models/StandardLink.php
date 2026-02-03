@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
+ * (c) 2025 GegoSoft Technologies and School Contributors
  */
 namespace App\Models;
 
@@ -63,17 +63,17 @@ class StandardLink extends Model
 
     public function temp_timetable()
     {
-        return $this->hasMany('\Gegok12\Timetable\Models\TempTimetable','standardLink_id','id');
+        return $this->hasMany('\School\Timetable\Models\TempTimetable','standardLink_id','id');
     }
 
      public function getLanguage_SubjectAttribute()
     {
-        return $this->hasMany('\Gegok12\Timetable\Models\TempTimetable','standardLink_id','id')->where('subject_type','language')->get();
+        return $this->hasMany('\School\Timetable\Models\TempTimetable','standardLink_id','id')->where('subject_type','language')->get();
     }
 
     public function getTimeTableCountAttribute()
     {
-       return $this->hasMany('\Gegok12\Timetable\Models\TempTimetable','standardLink_id','id')->count();
+       return $this->hasMany('\School\Timetable\Models\TempTimetable','standardLink_id','id')->count();
     
     }
     
@@ -136,7 +136,7 @@ class StandardLink extends Model
 
     public function timetable()
     {
-        return $this->hasMany('\Gegok12\Timetable\Models\Timetable','standardLink_id','id');
+        return $this->hasMany('\School\Timetable\Models\Timetable','standardLink_id','id');
     }
 
     public function assignment()
@@ -284,7 +284,7 @@ class StandardLink extends Model
         //return [];
 
 
-      return $this->hasMany('\Gegok12\Timetable\Models\TempTimetable','standardLink_id','id')->orderBy('schedule')->get();
+      return $this->hasMany('\School\Timetable\Models\TempTimetable','standardLink_id','id')->orderBy('schedule')->get();
 
   }
        

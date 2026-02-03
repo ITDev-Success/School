@@ -2,7 +2,7 @@
 @extends('layouts.main')
 
 @section('title')
-GegoK12 - Attendance Taker App |  Online School Management 
+School - Attendance Taker App |  Online School Management 
 @endsection
 
 @section('content')

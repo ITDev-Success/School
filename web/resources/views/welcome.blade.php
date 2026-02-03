@@ -41,7 +41,7 @@
 
         </div>
         <div class="container mx-auto my-8 text-sm">
-            Powered By : <a href="https://gegosoft.com">GegoK12</a>
+            Powered By : <a href="https://gegosoft.com">School</a>
         </div>
     </div>
     {{-- @include('welcome._slider_cta_section') --}}

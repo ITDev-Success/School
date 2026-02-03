@@ -696,9 +696,9 @@ trait RegisterUser
         {
             $sc_grade=Scholastic::where('id',$sc_grade)->first(); 
             
-            if(class_exists('Gegok12\Exam\Models\Mark'))
+            if(class_exists('School\Exam\Models\Mark'))
             {
-            $mark = new \Gegok12\Exam\Models\Mark;
+            $mark = new \School\Exam\Models\Mark;
             }
             else
             {
@@ -812,9 +812,9 @@ trait RegisterUser
         \DB::beginTransaction();
         try
         {
-            if(class_exists('Gegok12\Alumni\Models\Alumniprofile'))
+            if(class_exists('School\Alumni\Models\Alumniprofile'))
             {  
-                $alumni = new \Gegok12\Alumni\Models\Alumniprofile;
+                $alumni = new \School\Alumni\Models\Alumniprofile;
             }
             else{
                 $alumni = new Alumniprofile;

@@ -430,9 +430,9 @@ trait MemberProcess
 
             $users=$users->get();
 
-            if(class_exists('Gegok12\Alumni\Http\Resources\Alumni')) //new
+            if(class_exists('School\Alumni\Http\Resources\Alumni')) //new
             {
-                $users = \Gegok12\Alumni\Http\Resources\Alumni::collection($users);
+                $users = \School\Alumni\Http\Resources\Alumni::collection($users);
             }
             else
             {
@@ -468,9 +468,9 @@ trait MemberProcess
 
             $users=$users->get();
             
-            if(class_exists('Gegok12\Alumni\Http\Resources\Alumni')) //new
+            if(class_exists('School\Alumni\Http\Resources\Alumni')) //new
             {
-                $users = \Gegok12\Alumni\Http\Resources\Alumni::collection($users);
+                $users = \School\Alumni\Http\Resources\Alumni::collection($users);
             }
             else
             {

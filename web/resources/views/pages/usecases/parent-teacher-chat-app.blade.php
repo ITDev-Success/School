@@ -2,7 +2,7 @@
 @extends('layouts.main')
 
 @section('title')
-GegoK12 - parent-teacher-chat-app |  Online School Management 
+School - parent-teacher-chat-app |  Online School Management 
 @endsection
 
 @section('content')

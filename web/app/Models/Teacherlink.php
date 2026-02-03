@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
+ * (c) 2025 GegoSoft Technologies and School Contributors
  */
 namespace App\Models;
 
@@ -53,13 +53,13 @@ class Teacherlink extends Model
 
       public function getTeacherTimeTableAttribute()
     {
-       return $this->belongsTo('\Gegok12\Timetable\Models\TempTimetable','teacher_id','teacher_id')->count();
+       return $this->belongsTo('\School\Timetable\Models\TempTimetable','teacher_id','teacher_id')->count();
     
     }
 
     public function temp_timetable()
     {
-        return $this->hasMany('\Gegok12\Timetable\Models\TempTimetable','teacher_id','teacher_id');
+        return $this->hasMany('\School\Timetable\Models\TempTimetable','teacher_id','teacher_id');
     }
 
     public function lessonPlan()

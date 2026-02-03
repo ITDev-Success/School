@@ -17,7 +17,7 @@ class SchoolsTableSeeder extends Seeder
         DB::table('schools')->Insert([
             'id'           =>  '1',
             'name'         =>  'Demo School',
-            'email'        =>  'demoschool@gegok12.com',
+            'email'        =>  'demoschool@school.com',
             'phone'        =>  '9500979461',
             'status'       =>  '1',
             'slug'         =>  'demo-school',
@@ -29,7 +29,7 @@ class SchoolsTableSeeder extends Seeder
         // DB::table('schools')->Insert([
         //     'id'           =>  '2',
         //     'name'         =>  'Model School Two',
-        //     'email'        =>  'modelschool2@gegok12.com',
+        //     'email'        =>  'modelschool2@school.com',
         //     'phone'        =>  '8999911112',
         //     'status'       =>  '1',
         //     'slug'         =>  'model-school-two',

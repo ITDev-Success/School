@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
+ * (c) 2025 GegoSoft Technologies and School Contributors
  */
 namespace App\Http\Controllers\Admin;
 
@@ -204,18 +204,18 @@ class StudentDetailsController extends Controller
         $academic_year = SiteHelper::getAcademicYear($school_id);
 
         //new
-        if(class_exists('Gegok12\Fee\Models\Fee'))
+        if(class_exists('School\Fee\Models\Fee'))
         {
 
-            $fees = \Gegok12\Fee\Models\Fee::where([['school_id',$school_id],['academic_year_id',$academic_year->id]])->where('standardLink_id',$student->studentAcademicLatest->standardLink_id)->orWhere('standardLink_id',null)->orderBy('start_date','DESC')->paginate(5);
+            $fees = \School\Fee\Models\Fee::where([['school_id',$school_id],['academic_year_id',$academic_year->id]])->where('standardLink_id',$student->studentAcademicLatest->standardLink_id)->orWhere('standardLink_id',null)->orderBy('start_date','DESC')->paginate(5);
         }
         else{
             $fees = Fee::where([['school_id',$school_id],['academic_year_id',$academic_year->id]])->where('standardLink_id',$student->studentAcademicLatest->standardLink_id)->orWhere('standardLink_id',null)->orderBy('start_date','DESC')->paginate(5);
         }
         
-        if(class_exists('Gegok12\Fee\Http\Resources\UserFees'))
+        if(class_exists('School\Fee\Http\Resources\UserFees'))
         {
-            $feepayments = \Gegok12\Fee\Http\Resources\UserFees::collection($fees);
+            $feepayments = \School\Fee\Http\Resources\UserFees::collection($fees);
         }
         else
         {
@@ -402,9 +402,9 @@ class StudentDetailsController extends Controller
 
         $subjects_list=Teacherlink::where([['school_id',$school_id],['academic_year_id',$academic_year->id],['standardLink_id',$standardId]]);
         $subjects=$subjects_list->get()->pluck('subject.name')->toArray();
-        if(class_exists('Gegok12\Exam\Models\Exam'))
+        if(class_exists('School\Exam\Models\Exam'))
         {
-            $examss=\Gegok12\Exam\Models\Exam::where('standard_id',$standardId)->get();
+            $examss=\School\Exam\Models\Exam::where('standard_id',$standardId)->get();
 
         }
         else
@@ -419,9 +419,9 @@ class StudentDetailsController extends Controller
          $data=[];
          foreach ($examss as $key => $exam) {
 
-            if(class_exists('Gegok12\Exam\Models\Mark'))
+            if(class_exists('School\Exam\Models\Mark'))
             {
-                $exam_result=\Gegok12\Exam\Models\Mark::where('user_id',$studentId)->where('exam_id',$exam->id);
+                $exam_result=\School\Exam\Models\Mark::where('user_id',$studentId)->where('exam_id',$exam->id);
             }
             else{
                 $exam_result=Mark::where('user_id',$studentId)->where('exam_id',$exam->id);
@@ -434,9 +434,9 @@ class StudentDetailsController extends Controller
 
            $records= $subjects_list->get()->map(function ($seller) use ($school_id,$academic_year,$standardId,$exam) {
 
-            if(class_exists('Gegok12\Exam\Models\Mark'))
+            if(class_exists('School\Exam\Models\Mark'))
             {
-                $markings=\Gegok12\Exam\Models\Mark::where([['school_id',$school_id],['academic_year_id',$academic_year->id],['standard_id',$standardId],['exam_id',$exam->id],['subject_id',$seller->subject_id]])->first();
+                $markings=\School\Exam\Models\Mark::where([['school_id',$school_id],['academic_year_id',$academic_year->id],['standard_id',$standardId],['exam_id',$exam->id],['subject_id',$seller->subject_id]])->first();
             }
             else
             {

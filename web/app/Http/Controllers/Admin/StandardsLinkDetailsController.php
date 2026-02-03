@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
+ * (c) 2025 GegoSoft Technologies and School Contributors
  */
 namespace App\Http\Controllers\Admin;
 
@@ -74,9 +74,9 @@ class StandardsLinkDetailsController extends Controller
         if(Gate::allows('standardlink',$standardLink))
         {
             $academic_year = SiteHelper::getAcademicYear(Auth::user()->school_id);
-            if(class_exists('Gegok12\Timetable\Models\Timetable'))
+            if(class_exists('School\Timetable\Models\Timetable'))
             {
-                $timetable = \Gegok12\Timetable\Models\Timetable::where([
+                $timetable = \School\Timetable\Models\Timetable::where([
                         ['school_id',Auth::user()->school_id],
                         ['academic_year_id',$academic_year->id],
                         ['standardLink_id',$id]
@@ -91,9 +91,9 @@ class StandardsLinkDetailsController extends Controller
             }    
 
             $array['periodCount'] = count($timetable[0]['schedule']);
-            if(class_exists('Gegok12\Timetable\Http\Resources\Timetable'))
+            if(class_exists('School\Timetable\Http\Resources\Timetable'))
             {
-                $array['timetable'] = \Gegok12\Timetable\Http\Resources\Timetable::collection($timetable);
+                $array['timetable'] = \School\Timetable\Http\Resources\Timetable::collection($timetable);
             }
             else{
                 $array['timetable'] = TimetableResource::collection($timetable);
@@ -435,9 +435,9 @@ class StandardsLinkDetailsController extends Controller
         {
             $academic_year = SiteHelper::getAcademicYear(Auth::user()->school_id);
 
-            if(class_exists('Gegok12\Exam\Models\ExamSchedule'))
+            if(class_exists('School\Exam\Models\ExamSchedule'))
             {
-                $upcomingExams  = \Gegok12\Exam\Models\ExamSchedule::whereHas('exam',function($query) use($academic_year)
+                $upcomingExams  = \School\Exam\Models\ExamSchedule::whereHas('exam',function($query) use($academic_year)
                     { 
                         $query->where('academic_year_id',$academic_year->id);
                     })->where('standard_id',$standardLink->id)->where('start_time','>=',date('Y-m-d H:i:s'))->orderBy('start_time','ASC')->get(); 
@@ -475,9 +475,9 @@ class StandardsLinkDetailsController extends Controller
             $academic_year = SiteHelper::getAcademicYear(Auth::user()->school_id);
             $start_date = date('Y-m-d H:i:s',strtotime($academic_year->start_date));
 
-            if(class_exists('Gegok12\Exam\Models\ExamSchedule'))
+            if(class_exists('School\Exam\Models\ExamSchedule'))
             {
-                $pastExams  = \Gegok12\Exam\Models\ExamSchedule::whereHas('exam',function($query) use($academic_year)
+                $pastExams  = \School\Exam\Models\ExamSchedule::whereHas('exam',function($query) use($academic_year)
                     { 
                         $query->where('academic_year_id',$academic_year->id);
                     })->where('standard_id',$standardLink->id)->where([
@@ -520,9 +520,9 @@ class StandardsLinkDetailsController extends Controller
             $academic_year = SiteHelper::getAcademicYear(Auth::user()->school_id);
             
             //new condition
-            if(class_exists('Gegok12\Fee\Models\Fee'))
+            if(class_exists('School\Fee\Models\Fee'))
             {
-                $fees = \Gegok12\Fee\Models\Fee::where([
+                $fees = \School\Fee\Models\Fee::where([
                         ['school_id',Auth::user()->school_id],
                         ['academic_year_id',$academic_year->id],
                         ['standardLink_id',$id],
@@ -538,9 +538,9 @@ class StandardsLinkDetailsController extends Controller
             }
             //end
             
-            if(class_exists('Gegok12\Fee\Http\Resources\Fee'))
+            if(class_exists('School\Fee\Http\Resources\Fee'))
             {
-                $array['feelist'] = \Gegok12\Fee\Http\Resources\Fee::collection($fees);
+                $array['feelist'] = \School\Fee\Http\Resources\Fee::collection($fees);
             }
             else
             {
@@ -550,9 +550,9 @@ class StandardsLinkDetailsController extends Controller
             foreach ($fees as $fee) 
             {
                 //new condition
-                if(class_exists('Gegok12\Fee\Models\FeePayment'))
+                if(class_exists('School\Fee\Models\FeePayment'))
                 {
-                    $feepayments  = \Gegok12\Fee\Models\FeePayment::where('fee_id',$fee->id)->whereHas('user',function($query) use($id)
+                    $feepayments  = \School\Fee\Models\FeePayment::where('fee_id',$fee->id)->whereHas('user',function($query) use($id)
                     { 
                         $query->whereHas('studentAcademicLatest',function($q) use($id)
                             {
@@ -583,9 +583,9 @@ class StandardsLinkDetailsController extends Controller
                 $array['unpaidStudents'][$fee->id] = UserResource::collection($students[$fee->id]->get());
 
                 //new
-                if(class_exists('Gegok12\Fee\Http\Resources\FeePayment'))
+                if(class_exists('School\Fee\Http\Resources\FeePayment'))
                 {
-                    $feepayment = \Gegok12\Fee\Http\Resources\FeePayment::collection($feepayments->get());
+                    $feepayment = \School\Fee\Http\Resources\FeePayment::collection($feepayments->get());
                 }
                 else
                 {

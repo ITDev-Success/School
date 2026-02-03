@@ -1,4 +1,4 @@
-# GegoK12
+# School
 
 #### Version 1.0
 

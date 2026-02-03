@@ -1,7 +1,7 @@
 <?php
 /**
  * SPDX-License-Identifier: MIT
- * (c) 2025 GegoSoft Technologies and GegoK12 Contributors
+ * (c) 2025 GegoSoft Technologies and School Contributors
  */
 namespace App\Http\Controllers\Teacher;
 
@@ -236,9 +236,9 @@ class StudentDetailsController extends Controller
         $users=User::with('studentAcademic')->where('name',$name)->get();
         $studentId=$users[0]['id'];
         $standardId=$users[0]['studentAcademicLatest']['standardLink_id'];
-        if(class_exists('Gegok12\Exam\Models\Mark'))
+        if(class_exists('School\Exam\Models\Mark'))
         {
-            $exam=\Gegok12\Exam\Models\Mark::where('school_id',Auth::user()->school_id)->where('standard_id',$standardId)->take(2)->orderBy('exam_id','DESC')->groupBy('exam_id')->pluck('exam_id')->toArray();
+            $exam=\School\Exam\Models\Mark::where('school_id',Auth::user()->school_id)->where('standard_id',$standardId)->take(2)->orderBy('exam_id','DESC')->groupBy('exam_id')->pluck('exam_id')->toArray();
         }
         else{
             $exam=Mark::where('school_id',Auth::user()->school_id)->where('standard_id',$standardId)->take(2)->orderBy('exam_id','DESC')->groupBy('exam_id')->pluck('exam_id')->toArray();

@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
 
         // factory(App\Models\User::class, 1)->create([
         //     'name'         =>   'siteadmin',
-        //     'email'        =>   'siteadmin@gegok12.com',
+        //     'email'        =>   'siteadmin@school.com',
         //     'password'     =>  bcrypt('password'),
         //     'mobile_no'    =>   '1230456789',
         //     'usergroup_id' =>   "1"
@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
         // factory(App\Models\User::class, 1)->create([
         //     'school_id'    =>   '1',
         //     'name'         =>   'schooladmin',
-        //     'email'        =>   'admin@gegok12.com',
+        //     'email'        =>   'admin@school.com',
         //     'mobile_no'    =>   '2230456789',
         //     'usergroup_id' =>   "3"
         //   ]);
@@ -164,7 +164,7 @@ class UsersTableSeeder extends Seeder
         $librarian =  factory(App\Models\User::class)->create([
             'school_id'    =>   '1',
             'name'         =>   'librarian',
-            'email'        =>   'librarian@gegok12.com',
+            'email'        =>   'librarian@school.com',
             'mobile_no'    =>   '2230456701',
             'usergroup_id' =>   "8"
           ]);

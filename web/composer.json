@@ -51,6 +51,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
+        "barryvdh/laravel-ide-helper": "^3.1",
         "beyondcode/laravel-dump-server": "^1.9.0",
         "fakerphp/faker": "^1.9.1",
         "nunomaduro/collision": "^7.0",

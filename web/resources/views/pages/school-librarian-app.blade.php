@@ -2,7 +2,7 @@
 @extends('layouts.main')
 
 @section('title')
-GegoK12 - School Librarian App |  Online School Management 
+School - School Librarian App |  Online School Management 
 @endsection
 
 @section('content')
