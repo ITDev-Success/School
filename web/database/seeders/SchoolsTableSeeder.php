@@ -17,7 +17,7 @@ class SchoolsTableSeeder extends Seeder
         DB::table('schools')->Insert([
             'id'           =>  '1',
             'name'         =>  'Demo School',
-            'email'        =>  'demoschool@school.com',
+            'email'        =>  'admin@school.com',
             'phone'        =>  '9500979461',
             'status'       =>  '1',
             'slug'         =>  'demo-school',

@@ -161,32 +161,32 @@ class UsersTableSeeder extends Seeder
         // }
 
 
-        $librarian =  factory(App\Models\User::class)->create([
+        $user =  factory(User::class)->create([
             'school_id'    =>   '1',
-            'name'         =>   'librarian',
-            'email'        =>   'librarian@school.com',
+            'name'         =>   'user',
+            'email'        =>   'user@school.com',
             'mobile_no'    =>   '2230456701',
             'usergroup_id' =>   "8"
           ]);
 
         factory(\App\Models\Userprofile::class)->create([
-                'school_id'     =>  $librarian->school_id,
-                'user_id'       =>  $librarian->id,
-                'usergroup_id'  =>  $librarian->usergroup_id,
-                'firstname'     =>  'librarian',
-                'lastname'      =>  'librarian',
-                'profession'    =>  'librarian',
-                'address'       =>  'Namakkal,Tamilnadu,India',
+                'school_id'     =>  $user->school_id,
+                'user_id'       =>  $user->id,
+                'usergroup_id'  =>  $user->usergroup_id,
+                'firstname'     =>  'user',
+                'lastname'      =>  'user',
+                'profession'    =>  'user',
+                'address'       =>  'Antananarivo, Madagascar',
                 'country_id'    =>  '7',
-                'city_id'       =>  '31',
-                'state_id'      =>  '24',
-                'pincode'       =>  '625001'
+                'city_id'       =>  '1',
+                'state_id'      =>  '1',
+                'pincode'       =>  '101'
                 ]);
 
             factory(\App\Models\TeacherProfile::class)->create([
-                    'school_id'         =>  $librarian->school_id,
+                    'school_id'         =>  $user->school_id,
                     'academic_year_id'  =>  1,
-                    'user_id'           =>  $librarian->id,
+                    'user_id'           =>  $user->id,
                     'status'            =>  1,
                 ]);
 

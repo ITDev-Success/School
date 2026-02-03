@@ -32,11 +32,11 @@ class UsersSiteAdminTableSeeder extends Seeder
             'firstname'     =>  'siteadmin',
             'lastname'      =>  'siteadmin',
             'profession'    =>  'admin',
-            'address'       =>  'Nammakal,Tamilnadu,India',
+            'address'       =>  'Antananarivo, Madagascar',
             'country_id'    =>  '7',
-            'city_id'       =>  '31',
-            'state_id'      =>  '24',
-            'pincode'       =>  '625001'
+            'city_id'       =>  '1',
+            'state_id'      =>  '1',
+            'pincode'       =>  '101'
         ]);
     }
 }

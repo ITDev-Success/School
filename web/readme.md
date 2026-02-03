@@ -1,4 +1,4 @@
 # Admin Credentials (Default)
 
-Email: <demoschool@school.com>
+Email: <admin@school.com>
 Password: password
