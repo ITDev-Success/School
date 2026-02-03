@@ -1,0 +1,20 @@
+--- a/src/helpers.php
++++ b/src/helpers.php
+@@ -81,7 +81,7 @@
+      * @param  mixed  $default
+      * @return mixed
+      */
+-    function array_first($array, callable $callback = null, $default = null)
++    function array_first($array, ?callable $callback = null, $default = null)
+     {
+         return Arr::first($array, $callback, $default);
+     }
+@@ -153,7 +153,7 @@
+      * @param  mixed  $default
+      * @return mixed
+      */
+-    function array_last($array, callable $callback = null, $default = null)
++    function array_last($array, ?callable $callback = null, $default = null)
+     {
+         return Arr::last($array, $callback, $default);
+     }
