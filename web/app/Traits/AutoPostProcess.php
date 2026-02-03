@@ -30,14 +30,14 @@ trait AutoPostProcess
     {
         \DB::beginTransaction();
         try
-        {       //dd($data->studentAcademic[0][academic_year_id]); 
+        {       //dd($data->studentAcademic[0]['academic_year_id']); 
             if($data->usergroup_id=='6')
             {
-                $academic_year_id = $data->studentAcademic[0][academic_year_id];
+                $academic_year_id = $data->studentAcademic[0]['academic_year_id'];
             }
             else
             {
-                $academic_year_id = $data->teacherprofile[0][academic_year_id];
+                $academic_year_id = $data->teacherprofile[0]['academic_year_id'];
             }
 
          $eventdata=[
@@ -58,11 +58,11 @@ trait AutoPostProcess
             $event->school_id    = $school_id;
             if($data->usergroup_id=='6')
             {
-                $event->academic_year_id = $data->studentAcademic[0][academic_year_id];
+                $event->academic_year_id = $data->studentAcademic[0]['academic_year_id'];
             }
             else
             {
-                $event->academic_year_id = $data->teacherprofile[0][academic_year_id];
+                $event->academic_year_id = $data->teacherprofile[0]['academic_year_id'];
             }
            
             $event->title=$data->userprofile->firstname.$data->userprofile->lastname;
@@ -86,14 +86,14 @@ trait AutoPostProcess
             $post->school_id     = $school_id;
             if($data->usergroup_id=='6')
             {
-                $post->academic_year_id = $data->studentAcademic[0][academic_year_id];
+                $post->academic_year_id = $data->studentAcademic[0]['academic_year_id'];
                 $post->visibility       = 'select_class';
                 $post->visible_for      = $data->studentAcademic[0][standardLink_id];
 
             }
             else
             {
-                $post->academic_year_id = $data->teacherprofile[0][academic_year_id];
+                $post->academic_year_id = $data->teacherprofile[0]['academic_year_id'];
                 $post->visibility     = 'all_class';
                 $post->visible_for     = NULL;
             }
@@ -157,7 +157,7 @@ trait AutoPostProcess
         try
         {       //dd($data->studentAcademic[0]); 
          
-         $academic_year_id=$data->teacherprofile[0][academic_year_id];
+         $academic_year_id=$data->teacherprofile[0]['academic_year_id'];
          $eventdata=[
           'school_id'=>$data->school_id,
           'academic_year_id'=>$academic_year_id,
@@ -174,7 +174,7 @@ trait AutoPostProcess
         $event=\Calendar::createEvent($school_id,$academic_year_id,$eventdata);        
            /* $event = new Events;
             $event->school_id    = $data->school_id;
-            $event->academic_year_id = $data->teacherprofile[0][academic_year_id];
+            $event->academic_year_id = $data->teacherprofile[0]['academic_year_id'];
             $event->title=$data->userprofile->firstname.$data->userprofile->lastname;
             $event->description=$description;
             $event->select_type='school';
@@ -192,7 +192,7 @@ trait AutoPostProcess
             $post = new Post;
 
             $post->school_id     = $data->school_id;
-            $post->academic_year_id = $data->teacherprofile[0][academic_year_id];
+            $post->academic_year_id = $data->teacherprofile[0]['academic_year_id'];
             $post->entity_id  = '2';
             $post->entity_name     = 'App\Models\User';
             $post->description     = $data->userprofile->firstname.$data->userprofile->lastname.$description;

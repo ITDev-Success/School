@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Post;
 use Log;
+use Exception;
 
 class CheckPost extends Command
 {
@@ -60,7 +61,7 @@ class CheckPost extends Command
         catch(Exception $e)
         {
             Log::info($e->getMessage());
-            //dd($e->getMessage());
+            // dd($e->getMessage());
         }
     }
 }

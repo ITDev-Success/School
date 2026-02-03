@@ -67,7 +67,7 @@ class CheckTask extends Command
         }
         catch(Exception $e)
         {
-            Log::info($e->getMesage());
+            Log::info($e->getMessage());
             //dd($e->getMessage());
         }
     }

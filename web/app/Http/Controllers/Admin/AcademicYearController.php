@@ -55,7 +55,8 @@ class AcademicYearController extends Controller
         //
         $academicYears = AcademicYear::where('school_id',Auth::user()->school_id)->get();
 
-        return view('/admin/school/academics/index' , [ 'school' => $school , 'academicYears' => $academicYears]);
+        // return view('/admin/school/academics/index' , [ 'school' => $school , 'academicYears' => $academicYears]);
+        return view('/admin/school/academics/index' , ['academicYears' => $academicYears]);
     }
 
     /**
